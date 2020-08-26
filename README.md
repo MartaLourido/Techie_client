@@ -108,7 +108,7 @@ Techie is an application to find people in tech, go to events, post and recommen
 - Comments  -  type: String // required: true
 - Time -  type: Number // required: true
 - Place - typl: String // required: true
-- Number of people -  type: Number // required: true
+- NumberOfPeople -  type: Number // required: true
 
 ## Backend Routes
 
