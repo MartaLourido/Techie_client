@@ -85,18 +85,15 @@ Techie is an application to find people in tech, go to events, post and recommen
 - username - String // required
 - email - String // required & unique
 - password - String // required
-- userAvatar  -  type: String // required: true
-- followers  -  type: String // required: true
-- following - type: String // required: true
+- userAvatar  -  type: String 
+
 
 ### Post Model
 
-- userId -  type: String // required: true
-- userAvatar  -  type: String // required: true
-- likes  -  type: String // required: true
+- userId -  type: ObjectId // required: true 
 - likesCounter  -  type: Numer // required: true
 - textComment  -  type: String // required: true
-- Comments  -  type: String // required: true
+- Comments  -  type: Array of Strings // required: true
 
 ### Events Model
 
