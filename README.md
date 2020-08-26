@@ -66,7 +66,9 @@ Techie is an application to find people in tech, go to events, post and recommen
 ## Components
 
 - Search component
-
+- Navbar
+- AddForm
+- EditForm
 
 ## Services
 
@@ -103,6 +105,7 @@ Techie is an application to find people in tech, go to events, post and recommen
 - Date -  type: Number // required: true
 - Place - typl: String // required: true
 - Topics -  type: Array of Strings // required: true
+- NumberOfPeople - type: Array of objectIds // required: true
 
 ## Backend Routes
 
