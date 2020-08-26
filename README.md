@@ -90,22 +90,19 @@ Techie is an application to find people in tech, go to events, post and recommen
 
 ### Post Model
 
-- userId -  type: ObjectId // required: true 
+- createdBy -  type: ObjectId // required: true 
 - likesCounter  -  type: Numer // required: true
 - textComment  -  type: String // required: true
 - Comments  -  type: Array of Strings // required: true
 
 ### Events Model
 
-- eventId -  type: String // required: true
-- userAvatar  -  type: String // required: true
-- attendEvent  -  type: String // required: true
-- eventCounter  -  type: Numer // required: true
+- createdBy -  type: ObjectId // required: true
 - textComment  -  type: String // required: true
-- Comments  -  type: String // required: true
-- Time -  type: Number // required: true
+- Comments  -  type: Array of Strings // required: true
+- Date -  type: Number // required: true
 - Place - typl: String // required: true
-- NumberOfPeople -  type: Number // required: true
+- Topics -  type: Array of Strings // required: true
 
 ## Backend Routes
 
