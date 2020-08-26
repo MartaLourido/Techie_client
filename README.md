@@ -137,6 +137,8 @@ body:Event , event counter, text comment, time, place, number of people
 - GET /event/:id
 - DELETE /event/:id
 - EDIT /event/:id
+-  GET /feed
+
 
 # Links 
 
