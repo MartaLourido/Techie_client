@@ -1,68 +1,162 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Techie
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+Techie is an application to find people in tech, go to events, post and recommend articles.
 
-### `npm start`
+## User Stories
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- *As a user,* - I want to be able to access the homepage and be able to sign up or login.
+- *As a user,* - As a user I want to see an error page when an error happens.
+- *As a user,* - I can create an account and log in
+- *As a user,* - By logging in I can see my user profile, which I can edit and delete the account.
+- *As a user,* - I can log out, which will also be done when I delete the account
+- *As a user,* - I can search for events near me that interest me
+- *As a user,* - I can create events
+- *As a user,* - I can edit and delete events I have created
+- *As a user,* - I can check to attend events that I will be attending so I can know who else will be attending 
+- *As a user,* - Events can be seen by date and type of information 
+- *As a user,* - I can create a post to share a news, a link or something I have seen interesting about tech
+- *As a user,* - I can edit my posts
+- *As a user,* - I can delete my posts
+- *As a user,* - I can give like to the posts of others and add them to favorites
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+### Backlog
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Adding an API
+- Be able to do share of the post in social media 
+- Improve code 
+- Responsiveness
+- Add a map where you can see the events near me
+- Add a chat to talk to other users
+- Look for courses near you
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+# Client
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Routes
 
-### `npm run eject`
+- /signup
+- /login
+- /logout
+- /profile
+- /profile/edit-profile
+- /profile/feed
+- /Event-finder
+- /Event-description
+- /Event-description/create-event
+- /search/events
+- /search/posts
+- /comments/add-post
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Pages
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Home Page (public)
+- Sign up Page (public)
+- User profile (user only)
+- Edit user profile (user only)
+- Feed page (user only)
+- Event-finder page (user only)
+- Event-description page (user only)
+- Create-event page (user only)
+- 404 Page (public)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Components
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Search component
+- 
 
-## Learn More
+## Services
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Auth Service
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- auth.login(user)
+- auth.signup(user)
+- auth.logout()
 
-### Code Splitting
+# Server
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Models
 
-### Analyzing the Bundle Size
+### User Model
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- username - String // required
+- email - String // required & unique
+- password - String // required
+- userAvatar  -  type: String // required: true
+- followers  -  type: String // required: true
+- following - type: String // required: true
 
-### Making a Progressive Web App
+### Post Model
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- userId -  type: String // required: true
+- userAvatar  -  type: String // required: true
+- likes  -  type: String // required: true
+- likesCounter  -  type: Numer // required: true
+- textComment  -  type: String // required: true
+- Comments  -  type: String // required: true
 
-### Advanced Configuration
+### Events Model
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+- eventId -  type: String // required: true
+- userAvatar  -  type: String // required: true
+- attendEvent  -  type: String // required: true
+- eventCounter  -  type: Numer // required: true
+- textComment  -  type: String // required: true
+- Comments  -  type: String // required: true
+- Time -  type: Number // required: true
+- Place - typl: String // required: true
+- Number of people -  type: Number // required: true
 
-### Deployment
+## Backend Routes
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- GET /auth
+- POST /auth/signup
+body:
+username
+email
+password
 
-### `npm run build` fails to minify
+- POST /auth/login
+body:
+username
+password
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- POST /auth/logout
+body: (empty)
+- POST /user/me/favorite
+body:
+userId
+- DELETE /user/me/favorite/:userId
+body: (empty)
+-  GET /event
+- POST /event
+body:Event , event counter, text comment, time, place, number of people
+- GET /event/:id
+- DELETE /event/:id
+- EDIT /event/:id
+
+# Links 
+
+# Trello
+
+Link to your trello board or picture of your physical board https://trello.com/b/MZaW4i5D/techie
+
+# Git
+
+The url to your repository and to your deployed project 
+- https://github.com/MartaLourido/Techie_client
+
+- https://github.com/MartaLourido/Techie_server
+
+Repository Link
+
+Deploy Link
+
+# Slides
+
+The url to your presentation slides
+
+Slides Link
