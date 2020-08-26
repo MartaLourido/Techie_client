@@ -6,20 +6,20 @@ Techie is an application to find people in tech, go to events, post and recommen
 
 ## User Stories
 
-- *As a user,* - I want to be able to access the homepage and be able to sign up or login.
-- *As a user,* - As a user I want to see an error page when an error happens.
-- *As a user,* - I can create an account and log in
-- *As a user,* - By logging in I can see my user profile, which I can edit and delete the account.
-- *As a user,* - I can log out, which will also be done when I delete the account
-- *As a user,* - I can search for events near me that interest me
-- *As a user,* - I can create events
-- *As a user,* - I can edit and delete events I have created
-- *As a user,* - I can check to attend events that I will be attending so I can know who else will be attending 
-- *As a user,* - Events can be seen by date and type of information 
-- *As a user,* - I can create a post to share a news, a link or something I have seen interesting about tech
-- *As a user,* - I can edit my posts
-- *As a user,* - I can delete my posts
-- *As a user,* - I can give like to the posts of others and add them to favorites
+- *As a user,*  I want to be able to access the homepage and be able to sign up or login.
+- *As a user,*  As a user I want to see an error page when an error happens.
+- *As a user,* I can create an account and log in
+- *As a user,*  By logging in I can see my user profile, which I can edit and delete the account.
+- *As a user,*  I can log out, which will also be done when I delete the account
+- *As a user,*  I can search for events near me that interest me
+- *As a user,* I can create events
+- *As a user,* I can edit and delete events I have created
+- *As a user,*  I can check to attend events that I will be attending so I can know who else will be attending 
+- *As a user,*  Events can be seen by date and type of information 
+- *As a user,* I can create a post to share a news, a link or something I have seen interesting about tech
+- *As a user,* I can edit my posts
+- *As a user,* I can delete my posts
+- *As a user,* I can give like to the posts of others and add them to favorites
 
 
 ### Backlog
@@ -66,7 +66,7 @@ Techie is an application to find people in tech, go to events, post and recommen
 ## Components
 
 - Search component
-- 
+
 
 ## Services
 
