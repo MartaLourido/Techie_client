@@ -69,6 +69,8 @@ Techie is an application to find people in tech, go to events, post and recommen
 - Navbar
 - AddForm
 - EditForm
+- SignIn
+- SignUp
 
 ## Services
 
