@@ -1,13 +1,14 @@
 import React from 'react';
-// import logo from './logo.svg';
+// import logo from './img/logo.png
 import './App.css';
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import { Route, Link, Switch } from "react-router-dom";
-// import 'bootstrap/dist/css/bootstrap.css'
-import Nav from './components/Nav'
+import 'bootstrap/dist/css/bootstrap.css'
+import MyNav from './components/MyNav'
 import axios from 'axios'
 import {API_URL} from './config'
+import Home from './components/Home'
 
 class App extends React.Component {
 
@@ -55,12 +56,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Nav loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} />
+        <MyNav loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} />
         <Switch >
-          <Route path="/sign-in" render={(routeProps) => {
+        <Route exact path="/" render={(routeProps) => {
+            return <Home {...routeProps} />
+          }} />
+          <Route path="/SignIn" render={(routeProps) => {
             return <SignIn onSignIn={this.handleSignIn} {...routeProps} />
           }} />
-          <Route path="/sign-up" render={(routeProps) => {
+          <Route path="/SignUp" render={(routeProps) => {
             return <SignUp onSignUp={this.handleSignUp} {...routeProps} />
           }} />
         </Switch>
