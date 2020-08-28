@@ -91,10 +91,10 @@ class App extends React.Component {
           <Route exact path="/" render={(routeProps) => {
             return <Home {...routeProps} />
           }} />
-          <Route path="/SignIn" render={(routeProps) => {
+          <Route exact path="/SignIn" render={(routeProps) => {
             return <SignIn onSignIn={this.handleSignIn} {...routeProps} />
           }} />
-          <Route path="/SignUp" render={(routeProps) => {
+          <Route exact path="/SignUp" render={(routeProps) => {
             return <SignUp onSignUp={this.handleSignUp} {...routeProps} />
           }} />
         </Switch>
