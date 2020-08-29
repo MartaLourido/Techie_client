@@ -92,7 +92,7 @@ Techie is an application to find people in tech, go to events, post and recommen
 - userAvatar  -  type: String 
 
 
-### Post Model
+### Feed Model
 
 - createdBy -  type: ObjectId // required: true 
 - likesCounter  -  type: Numer // required: true

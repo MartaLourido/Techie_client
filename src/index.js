@@ -5,10 +5,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
 
+
+import { Feed } from "./components/Feed"
+
+
+
 ReactDOM.render(
   <BrowserRouter>
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <Feed/>
   </React.StrictMode>
   </BrowserRouter>,
 
