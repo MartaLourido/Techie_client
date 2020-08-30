@@ -1,36 +1,59 @@
 import React, { Component } from 'react'
-import { FeedStore } from '../models/feedStore'
-import CommentPannel from './CommentPanel'
+import CommentPanel from './CommentPanel'
+import {API_URL} from '../config' 
+import axios from 'axios'
 
 export class Feed extends Component {
 
     state = {
+        description: "",
         feeds: [],
-        comment: "",
-    }
-
+      }
+   
     componentDidMount() {
         //aqui voy a colocar la ruta que conecte al backend, aqui va el axios con el /feed
+        this.getFeed();
+    }
+    
+    getFeed () {
+
+        axios.get(`${API_URL}/feed`, { withCredentials: true })
+        .then((res) => {
+            this.setState({
+                feeds: res.data
+            })
+
+        })
+        .catch((err) => {
+            console.log ('An error ocurred: ' + err);
+        })    
     }
 
     /**
      * Enviar al servidor
      */
     sendComment() {
-        FeedStore.createComment(this.state.comment)
-        this.showThecomments()
-    }
+        axios.post(`${API_URL}/feed/create`,  {description: this.state.description  }, { withCredentials: true})
+        .then(() => {
+                this.getFeed();
+            })
+            .catch((err) => {
+                console.log ('An error ocurred: ' + err);
+            })    
+        }
+   
+
 
     handleTextChange = (e) => {
         let updatedComment = e.target.value
         this.setState({
-            comment: updatedComment
+            description: updatedComment
         })
     }
 
     showThecomments() {
         this.setState({
-            feeds: FeedStore.getAll()
+            // feeds: FeedStore.getAll()
         })
     }
 
@@ -39,11 +62,11 @@ export class Feed extends Component {
             <div>
                 <div className="input-comment-box">
 
-                    <input name="name" type="text" placeholder="Write your comment here "
+                    <input className="form-control col-md-5" name="description" type="text" placeholder="Write your comment here "
                         onChange={(e) => this.handleTextChange(e)}
                     />
 
-                    <button
+                    <button className="btn btn-primary"
                         onClick={() => this.sendComment()}
                     >
                         Comment
@@ -54,7 +77,7 @@ export class Feed extends Component {
                         {
                             this.state.feeds.map((elem) => {
                                 return (
-                                    <CommentPannel feed={elem}/>
+                                    <CommentPanel feed={elem} />
                                 )
                             })
                         }

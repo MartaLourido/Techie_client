@@ -9,11 +9,13 @@ import MyNav from './components/MyNav'
 import axios from 'axios'
 import { API_URL } from './config'
 import Home from './components/Home'
+import Feed from './components/Feed'
 
 class App extends React.Component {
 
   state = {
     loggedInUser: null,
+    
   }
 
   componentDidMount(){
@@ -81,6 +83,9 @@ class App extends React.Component {
       })  
   }
 
+
+
+
   render() {
     return (
       <div className="App">
@@ -96,6 +101,9 @@ class App extends React.Component {
           }} />
           <Route exact path="/SignUp" render={(routeProps) => {
             return <SignUp onSignUp={this.handleSignUp} {...routeProps} />
+          }} />
+          <Route exact path="/Feed" render={(routeProps) => {
+            return <Feed {...routeProps} />
           }} />
         </Switch>
       </div>

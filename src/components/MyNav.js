@@ -39,6 +39,9 @@ render() {
                 <MDBNavItem>
                   <MDBNavLink to="/SignUp">SignUp</MDBNavLink>
                 </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink to="/Feed">Feed</MDBNavLink>
+                </MDBNavItem>
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>
