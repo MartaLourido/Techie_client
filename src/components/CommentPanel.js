@@ -1,18 +1,32 @@
 import React, { Component } from 'react'
-import { FeedStore } from '../models/feed'
+import { FeedStore } from '../models/feedStore'
 
 class CommentPannel extends Component {
     state = {
-        
+        likesCounter: this.props.feed.likesCounter
     }
-    clickLikes () {
-       this.props.feed.likesCounter = this.props.feed.likesCounter+1
-       //FeedStore.update()fgfhfgh
 
+    clickLikes() {
+        this.setState((prevState) => {
+            let newLikesCounter = prevState.likesCounter + 1
+
+            const feed = {
+                ...this.props.feed,
+                likesCounter: newLikesCounter
+            }
+
+            FeedStore.update(feed)
+
+            return ({
+                likesCounter: newLikesCounter
+            })
+        })
     }
 
     render() {
         const { feed } = this.props
+        const { likesCounter } = this.state
+
         return (
             <li key={feed.id}>
                 {feed.textComment}
@@ -20,8 +34,8 @@ class CommentPannel extends Component {
                     {feed.createdBy}
                 </p>
                 <p>
-                    {feed.likesCounter}
-                    <button onClick={ () => this.clickLikes() }>❤️</button>
+                    {likesCounter}
+                    <button onClick={() => this.clickLikes()}>❤️</button>
                 </p>
             </li>
         )

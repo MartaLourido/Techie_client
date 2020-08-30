@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FeedStore } from '../models/feed'
+import { FeedStore } from '../models/feedStore'
 import CommentPannel from './CommentPanel'
 
 export class Feed extends Component {

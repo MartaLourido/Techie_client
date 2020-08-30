@@ -3,6 +3,8 @@
 // - textComment  -  type: String // required: true
 // - Comments  -  type: Array of Strings // required: true
 
+import Axios from "axios"
+
 const feedEjemplo ={
     id: '',
     createdBy: '',
@@ -20,12 +22,19 @@ export class FeedStore {
             feed.id = FeedStore.generateId()
         }
         this.store.push( feed )
-        console.log( "store content: ", this.store )
     }
-
+    
     static get( id ) {
         // return this.store[ id ]
     }
+    
+    static update( feed ) {
+        this.store.splice( this.store.find( elem => elem.id === feed.id ), 1, feed )
+        console.log( "store content: ", this.store )
+        // axios.put( 'http://localhost:4000/' + 'feed/' +feed.id+'/edit', JSON.parse( feed ) )
+    }
+
+
     //funciones para crear un comentario 
     static generateId() {
         return Date.now()
