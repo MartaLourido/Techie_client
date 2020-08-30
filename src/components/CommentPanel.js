@@ -3,7 +3,9 @@ import { FeedStore } from '../models/feedStore'
 
 class CommentPannel extends Component {
     state = {
-        likesCounter: this.props.feed.likesCounter
+        likesCounter: this.props.feed.likesCounter,
+        comments: this.props.feed.comments,
+        doShowSubComments: false
     }
 
     clickLikes() {
@@ -23,6 +25,49 @@ class CommentPannel extends Component {
         })
     }
 
+    clickComment() {
+        // showComments
+        this.setState((prevState)=>{
+            return ({
+                doShowSubComments: !prevState.doShowSubComments
+            })
+        })
+    }
+    //falta newcomment, misma logica comment principal
+    showSubComments() {
+        return(
+            <>
+                <div className="subcomment-box">
+                    <input/>
+                    <button>New Comment</button>
+                </div>
+                <div className="comment-list">
+                    <ul>
+                        {
+                            this.props.feed.comments.map((elem) => {
+                                return (
+                                    {elem} 
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
+            </>
+        )
+    }
+
+    comments() {
+        const {doShowSubComments} = this.state
+        return (
+            <>
+                <span>
+                    <button onClick={() => this.clickComment()}>Comment</button>
+                </span>
+                { doShowSubComments && this.showSubComments() }
+            </>
+        )
+    }
+
     render() {
         const { feed } = this.props
         const { likesCounter } = this.state
@@ -33,13 +78,16 @@ class CommentPannel extends Component {
                 <p>
                     {feed.createdBy}
                 </p>
-                <p>
+                {this.comments()}
+                <span>
                     {likesCounter}
                     <button onClick={() => this.clickLikes()}>❤️</button>
-                </p>
+                </span>
             </li>
         )
     }
+
+
 }
 
 export default CommentPannel;
