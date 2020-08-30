@@ -15,24 +15,24 @@ class App extends React.Component {
 
   state = {
     loggedInUser: null,
-    
+
   }
 
-  componentDidMount(){
+  componentDidMount() {
     axios.get(`${API_URL}/todos`)
       .then((res) => {
-          this.setState({
-            todos: res.data
-          })
+        this.setState({
+          todos: res.data
+        })
       })
-    if (!this.state.loggedInUser){
-      axios.get(`${API_URL}/user`, {withCredentials: true})
-      .then((res) => {
+    if (!this.state.loggedInUser) {
+      axios.get(`${API_URL}/user`, { withCredentials: true })
+        .then((res) => {
           this.setState({
             loggedInUser: res.data
           })
-      })
-    }  
+        })
+    }
   }
 
   handleSignIn = (e) => {
@@ -54,11 +54,11 @@ class App extends React.Component {
   }
 
   handleLogOut = (e) => {
-    axios.post(`${API_URL}/logout`, {}, {withCredentials: true})
+    axios.post(`${API_URL}/logout`, {}, { withCredentials: true })
       .then(() => {
         this.setState({
           loggedInUser: null
-        }, ()=>{
+        }, () => {
           this.props.history.push('/')
         })
       })
@@ -66,21 +66,21 @@ class App extends React.Component {
 
   handleSignUp = (e) => {
     e.preventDefault();
-    const {username, email, password} = e.currentTarget;
-  
+    const { username, email, password } = e.currentTarget;
+
     axios.post(`${API_URL}/signup`, {
       username: username.value,
-      email: email.value, 
+      email: email.value,
       password: password.value
-    },  {withCredentials: true})
+    }, { withCredentials: true })
       .then((res) => {
         console.log(res)
         this.setState({
           loggedInUser: res.data
-        } ,() => {
+        }, () => {
           this.props.history.push('/')
         })
-      })  
+      })
   }
 
 
@@ -88,24 +88,34 @@ class App extends React.Component {
 
   render() {
     return (
+
       <div className="App">
-        <h1>Hello. Welcome to Techie</h1>
-          <img src="logo.svg" alt="logo icon" />
-        <MyNav loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} />
-        <Switch >
-          <Route exact path="/" render={(routeProps) => {
-            return <Home {...routeProps} />
-          }} />
-          <Route exact path="/SignIn" render={(routeProps) => {
-            return <SignIn onSignIn={this.handleSignIn} {...routeProps} />
-          }} />
-          <Route exact path="/SignUp" render={(routeProps) => {
-            return <SignUp onSignUp={this.handleSignUp} {...routeProps} />
-          }} />
-          <Route exact path="/Feed" render={(routeProps) => {
-            return <Feed {...routeProps} />
-          }} />
-        </Switch>
+
+
+        <nav class="navbar navbar-light ">
+          <a class="navbar-brand" href="/">
+            <img src="logo.png" height="100" class="d-inline-block align-top" alt="" loading="lazy"/>
+              Hello. Welcome to Techie
+          </a>
+        </nav>
+
+          <MyNav loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} >
+
+          </MyNav>
+          <Switch >
+            <Route exact path="/" render={(routeProps) => {
+              return <Home {...routeProps} />
+            }} />
+            <Route exact path="/SignIn" render={(routeProps) => {
+              return <SignIn onSignIn={this.handleSignIn} {...routeProps} />
+            }} />
+            <Route exact path="/SignUp" render={(routeProps) => {
+              return <SignUp onSignUp={this.handleSignUp} {...routeProps} />
+            }} />
+            <Route exact path="/Feed" render={(routeProps) => {
+              return <Feed {...routeProps} />
+            }} />
+          </Switch>
       </div>
     );
   }
