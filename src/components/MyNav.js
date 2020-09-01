@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer,
-MDBIcon } from 'mdbreact';
+import {
+  MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer,
+  MDBIcon
+} from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
 // import * as mdb from 'mdb-ui-kit'; // lib
 // import { Input } from 'mdb-ui-kit'; // module
 
 
 class MyNav extends Component {
-state = {
-  collapseID: ''
-}
+  state = {
+    collapseID: ''
+  }
 
-toggleCollapse = collapseID => () => {
-  this.setState(prevState => ({ collapseID: (prevState.collapseID !== collapseID ? collapseID : '') }));
-}
+  toggleCollapse = collapseID => () => {
+    this.setState(prevState => ({ collapseID: (prevState.collapseID !== collapseID ? collapseID : '') }));
+  }
 
-render() {
-  return (
+  render() {
+    return (
       <MDBContainer>
         <MDBNavbar color="green lighten-4" style={{ marginTop: '20px' }} light>
           <MDBContainer>
@@ -39,9 +41,22 @@ render() {
                 <MDBNavItem>
                   <MDBNavLink to="/SignUp">SignUp</MDBNavLink>
                 </MDBNavItem>
-                <MDBNavItem>
-                  <MDBNavLink to="/Feed">Feed</MDBNavLink>
-                </MDBNavItem>
+                {
+                  this.props.loggedInUser ? (
+                    <>
+                      <MDBNavItem>
+                        <MDBNavLink to="/User">My profile</MDBNavLink>
+                      </MDBNavItem>
+                      <MDBNavItem>
+                        <MDBNavLink to="/Feed">Feed</MDBNavLink>
+                      </MDBNavItem>
+                      <MDBNavItem>
+                        <MDBNavLink to="/Events">Events</MDBNavLink>
+                      </MDBNavItem>
+                      <button onClick={this.props.onLogout}>Logout</button>
+                    </>
+                  ) : ''
+                }
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>
@@ -63,7 +78,7 @@ export default MyNav;
 // class MyNav extends React.Component {
 //   showSettings (event) {
 //     event.preventDefault();
-    
+
 //   }
 
 //   render () {

@@ -11,7 +11,7 @@ export default function SignIn(props){
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input name="password" type="password" className="form-control" id="exampleInputPassword1" />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Sign In!</button>
         </form>
     )
 }

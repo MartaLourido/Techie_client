@@ -19,6 +19,14 @@ class CommentPanel extends Component {
             })
     }
 
+
+//      // method to show/hide form to add new comments
+//   handleClick = () => {
+//     this.setState({
+//       form: !this.state.form
+//     });
+//   };
+
     clickComment() {
         // showComments
         this.setState((prevState) => {

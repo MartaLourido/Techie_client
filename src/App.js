@@ -10,6 +10,11 @@ import axios from 'axios'
 import { API_URL } from './config'
 import Home from './components/Home'
 import Feed from './components/Feed'
+import UserProfile from './components/UserProfile'
+import Events from './components/Events'
+import EditProfile from './components/EditProfile';
+import EventCard from './components/EventCard'
+import CreateEvent from './components/CreateEvent';
 
 class App extends React.Component {
 
@@ -19,12 +24,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`${API_URL}/todos`)
-      .then((res) => {
-        this.setState({
-          todos: res.data
-        })
-      })
+    // axios.get(`${API_URL}/`)
+    //   .then((res) => {
+    //     this.setState({
+    //       : res.data
+    //     })
+    //   })
     if (!this.state.loggedInUser) {
       axios.get(`${API_URL}/user`, { withCredentials: true })
         .then((res) => {
@@ -48,21 +53,14 @@ class App extends React.Component {
         this.setState({
           loggedInUser: res.data
         }, () => {
-          this.props.history.push('/')
+          this.props.history.push('/user')  //redirect to the userprofile when you do a login
         })
       })
+      .catch((err) => {
+        console.log ('An error ocurred: ' + err);
+    })    
   }
 
-  handleLogOut = (e) => {
-    axios.post(`${API_URL}/logout`, {}, { withCredentials: true })
-      .then(() => {
-        this.setState({
-          loggedInUser: null
-        }, () => {
-          this.props.history.push('/')
-        })
-      })
-  }
 
   handleSignUp = (e) => {
     e.preventDefault();
@@ -81,9 +79,21 @@ class App extends React.Component {
           this.props.history.push('/')
         })
       })
+      .catch((err) => {
+        console.log ('An error ocurred: ' + err);
+    })    
   }
 
-
+  handleLogOut = (e) => {
+    axios.post(`${API_URL}/logout`, {}, { withCredentials: true })
+      .then(() => {
+        this.setState({
+          loggedInUser: null
+        }, () => {
+          this.props.history.push('/')
+        })
+      })
+  }
 
 
   render() {
@@ -92,30 +102,45 @@ class App extends React.Component {
       <div className="App">
 
 
-        <nav class="navbar navbar-light ">
-          <a class="navbar-brand" href="/">
-            <img src="logo.png" height="100" class="d-inline-block align-top" alt="" loading="lazy"/>
+        <nav className="navbar navbar-light ">
+          <a className="navbar-brand" href="/">
+            <img src="logo.png" height="100" className="d-inline-block align-top" alt="" loading="lazy" />
               Hello. Welcome to Techie
           </a>
         </nav>
 
-          <MyNav loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} >
-
-          </MyNav>
-          <Switch >
-            <Route exact path="/" render={(routeProps) => {
-              return <Home {...routeProps} />
-            }} />
-            <Route exact path="/SignIn" render={(routeProps) => {
-              return <SignIn onSignIn={this.handleSignIn} {...routeProps} />
-            }} />
-            <Route exact path="/SignUp" render={(routeProps) => {
-              return <SignUp onSignUp={this.handleSignUp} {...routeProps} />
-            }} />
-            <Route exact path="/Feed" render={(routeProps) => {
-              return <Feed {...routeProps} />
-            }} />
-          </Switch>
+        <MyNav loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} >
+      
+        </MyNav>
+        <Switch >
+          <Route exact path="/" render={(routeProps) => {
+            return <Home {...routeProps} />
+          }} />
+          <Route exact path="/SignIn" render={(routeProps) => {
+            return <SignIn onSignIn={this.handleSignIn} {...routeProps} />
+          }} />
+          <Route exact path="/SignUp" render={(routeProps) => {
+            return <SignUp onSignUp={this.handleSignUp} {...routeProps} />
+          }} />
+          <Route exact path="/Feed" render={(routeProps) => {
+            return <Feed {...routeProps} />
+          }} />
+          <Route exact path="/user" render={(routeProps) => {
+            return <UserProfile {...routeProps} />
+          }} />
+           <Route exact path="/user/edit" render={(routeProps) => {
+            return <EditProfile loggedInUser={this.state.loggedInUser} {...routeProps} />
+          }} />
+           <Route exact path="/events" render={(routeProps) => {
+            return <Events {...routeProps} />
+          }} />
+           <Route exact path="/CreateEvent" render={(routeProps) => {
+            return <CreateEvent {...routeProps} />
+          }} />
+           <Route exact path="/event/:id" render={(routeProps) => {
+            return <EventCard {...routeProps} />
+          }} />
+        </Switch>
       </div>
     );
   }
