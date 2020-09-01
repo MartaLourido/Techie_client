@@ -82,6 +82,7 @@ export class Events extends Component {
                                             <img width="300px" height="200px" className="img-rounded mx-auto d-block" src="https://area51.co/wp-content/grand-media/image/linkedin_ice_cave.jpg" alt="event img"></img>
                                         </div>
                                         <div class="col-md-12 text-center">
+                                        <h5>{elem.date}</h5>
                                             <h3>{elem.name}</h3>
                                         </div>
                                         <h4>Topic of the day: {elem.topics}</h4>

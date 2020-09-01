@@ -41,7 +41,14 @@ export class Feed extends Component {
                 console.log ('An error ocurred: ' + err);
             })    
         }
-   
+
+   addComment = (id, comment) => {
+       console.log(id, comment)
+       axios.put(`${API_URL}/feed/${id}/addcomment`, {comment}, {withCredentials: true})
+        .then(() => {
+            this.getFeed()
+        })
+    }
 
 
     handleTextChange = (e) => {
@@ -77,7 +84,7 @@ export class Feed extends Component {
                         {
                             this.state.feeds.map((elem) => {
                                 return (
-                                    <CommentPanel feed={elem} />
+                                    <CommentPanel addComment={this.addComment} feed={elem} />
                                 )
                             })
                         }

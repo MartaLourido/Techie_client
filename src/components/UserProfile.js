@@ -28,6 +28,7 @@ class UserProfile extends Component {
                 console.log('An error ocurred: ' + err);
             })
     }
+    
     render() {
         console.log(this.state.user)
         return (

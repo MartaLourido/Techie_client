@@ -102,10 +102,10 @@ class App extends React.Component {
       <div className="App">
 
 
-        <nav className="navbar navbar-light ">
+        <nav className="navbar navbar-dark bg-dark">
           <a className="navbar-brand" href="/">
             <img src="logo.png" height="100" className="d-inline-block align-top" alt="" loading="lazy" />
-              Hello. Welcome to Techie
+              
           </a>
         </nav>
 

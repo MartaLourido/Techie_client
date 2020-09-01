@@ -42,7 +42,7 @@ class CreateEvent extends Component {
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
 
-                    <div className="form-row">
+                    <div className="form-group row">
                         <label for="name">Name</label>
                         <input
                             type="text"
@@ -59,6 +59,7 @@ class CreateEvent extends Component {
                             onChange={this.handleInput}
                             className="form-control"
                         />
+                       
                         <label for="Topics">Topics</label>
                         <input
                             type="text"
@@ -91,7 +92,7 @@ class CreateEvent extends Component {
                             value={this.state.place}
                             onChange={this.handleInput}
                         />
-
+                    
 
                     </div>
                     <div class="custom-file mt-3" >
@@ -100,11 +101,13 @@ class CreateEvent extends Component {
                             onChange={this.handleInput}
                         />
                         <label class="custom-file-label" for="image">Choose image</label>
+                        
                     </div>
-                    <button type="submit" class="btn btn-danger mt-3">Save</button>
+                
+                    <button type="submit" class="btn btn-warning mt-3">Save</button>
                 </form>
                 <Link to="/Events">
-                    <button type="button" class="btn btn-warning">Go back</button>
+                    <button type="button" className="btn btn-secondary mt-2">Go back</button>
                 </Link>
             </div>
         );
