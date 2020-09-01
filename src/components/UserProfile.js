@@ -28,6 +28,24 @@ class UserProfile extends Component {
                 console.log('An error ocurred: ' + err);
             })
     }
+
+    handleDelete = (id) => {
+        axios.delete(`${API_URL}/profile/${id}`, {withCredentials: true})
+          .then(() => {
+              
+            let filteredUser = this.state.user.filter((user) => {
+              return user._id !== id
+            })
+    
+            this.setState({
+              user: filteredUser
+            }, () => {
+              this.props.history.push('/Home')
+            })
+    
+          })
+      }
+
     
     render() {
         console.log(this.state.user)
@@ -58,7 +76,7 @@ class UserProfile extends Component {
                         <Link to="/user/edit">
                             <button type="button" class="btn btn-warning">Edit Profile</button>
                         </Link>
-                        <button className="btn btn-danger" onClick={() => this.deleteProfile()} > Delete Profile </button>
+                        <button className="btn btn-danger" onClick={() => this.handleDelete()} > Delete Profile </button>
                     </div>
                 </div>
             </div >

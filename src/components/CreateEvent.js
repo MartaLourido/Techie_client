@@ -14,15 +14,18 @@ class CreateEvent extends Component {
             numberOfPeople: 0,
             topics: "",
             city: "",
-            image: "",
+            image: null,
             date: new Date(),
+            description: "",
         };
+
+        this.onImageChange = this.onImageChange.bind(this);
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { name, date, place, topics, numberOfPeople, city, image } = this.state;
-        axios.post(`${API_URL}/event/create`, { name: name, date: date, place: place, topics: topics, numberOfPeople: numberOfPeople, city: city, image: image }, { withCredentials: true })
+        const { name, date, place, topics, numberOfPeople, city, image, description } = this.state;
+        axios.post(`${API_URL}/event/create`, { name: name, date: date, place: place, topics: topics, numberOfPeople: numberOfPeople, city: city, image: image, description: description }, { withCredentials: true })
             .then(res => {
                 this.props.history.push('/events')
             })
@@ -37,6 +40,16 @@ class CreateEvent extends Component {
         });
     };
 
+    onImageChange = event => {
+        if (event.target.files && event.target.files[0]) {
+            let img = event.target.files[0];
+            this.setState({
+                image: URL.createObjectURL(img)
+            });
+        }
+    };
+
+  
     render() {
         return (
             <div className="container">
@@ -59,7 +72,7 @@ class CreateEvent extends Component {
                             onChange={this.handleInput}
                             className="form-control"
                         />
-                       
+
                         <label for="Topics">Topics</label>
                         <input
                             type="text"
@@ -92,18 +105,31 @@ class CreateEvent extends Component {
                             value={this.state.place}
                             onChange={this.handleInput}
                         />
-                    
+                           <label for="Place">Description </label>
+                        <input
+                            type="description"
+                            name="description"
+                            className="form-control"
+                            value={this.state.description}
+                            onChange={this.handleInput}
+                        />
+
 
                     </div>
-                    <div class="custom-file mt-3" >
+                    {/* <div class="custom-file mt-3" >
                         <input type="file" class="custom-file-input" id="image"
                             value={this.state.image}
                             onChange={this.handleInput}
                         />
                         <label class="custom-file-label" for="image">Choose image</label>
                         
+                    </div> */}
+                    <div>
+                        <img src={this.state.image} />
+                        <h5>Select Image</h5>
+                        <input type="file" name="myImage" onChange={this.onImageChange} />
                     </div>
-                
+
                     <button type="submit" class="btn btn-warning mt-3">Save</button>
                 </form>
                 <Link to="/Events">

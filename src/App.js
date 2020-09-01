@@ -15,6 +15,8 @@ import Events from './components/Events'
 import EditProfile from './components/EditProfile';
 import EventCard from './components/EventCard'
 import CreateEvent from './components/CreateEvent';
+import AttendEvent from './components/AttendEvent'
+var moment = require('moment');
 
 class App extends React.Component {
 
@@ -139,6 +141,9 @@ class App extends React.Component {
           }} />
            <Route exact path="/event/:id" render={(routeProps) => {
             return <EventCard {...routeProps} />
+          }} />
+           <Route exact path="/AttendEvent" render={(routeProps) => {
+            return <AttendEvent {...routeProps} />
           }} />
         </Switch>
       </div>

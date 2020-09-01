@@ -19,6 +19,7 @@ class MyNav extends Component {
 
   render() {
     return (
+     
       <MDBContainer>
         <MDBNavbar color="green lighten-4" style={{ marginTop: '20px' }} light>
           <MDBContainer>
@@ -51,21 +52,23 @@ class MyNav extends Component {
                       <button onClick={this.props.onLogout}>Logout</button>
                     </>
                   ) : (
-                  <>
-                  <MDBNavItem>
-                    <MDBNavLink to="/SignIn">SignIn</MDBNavLink>
-                  </MDBNavItem>
-                    <MDBNavItem>
-                      <MDBNavLink to="/SignUp">SignUp</MDBNavLink>
-                    </MDBNavItem>
-                  </>  )
+                      <>
+                        <MDBNavItem>
+                          <MDBNavLink to="/SignIn">SignIn</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                          <MDBNavLink to="/SignUp">SignUp</MDBNavLink>
+                        </MDBNavItem>
+                      </>)
                 }
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>
         </MDBNavbar>
       </MDBContainer>
-
+      
+       
+   
     );
   }
 }

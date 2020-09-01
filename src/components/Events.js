@@ -2,13 +2,19 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { API_URL } from '../config'
 import { Redirect, Link } from 'react-router-dom';
-import Search from './Search'
+// import Search from './Search'
+import Moment from 'moment';
+// import SearchEvent from './SearchEvent'
 
 export class Events extends Component {
 
     state = {
-        events: []
-        // filteredEvents: events
+        events: [],
+        filtered: this.props.events,
+        dateYMD: Moment("01-07-1994").format('YYYY-MM-DD'),
+        image: "",
+        
+        
     }
 
     //get the events
@@ -40,10 +46,10 @@ export class Events extends Component {
     }
 
     //       // method for the search filter functionality. Invoked in Search.
-    // filterEvents = input => {
-    //     const filtered = this.state.Events.filter(el => el.name.toLowerCase().includes(input.toLowerCase()));
-    //     this.setState({ filtered });
-    // };
+    filterEvents = input => {
+        const filtered = this.state.events.filter(el => el.name.toLowerCase().includes(input.toLowerCase()));
+        this.setState({ filtered });
+    };
 
     // //method for sort by city and topic
 
@@ -60,11 +66,19 @@ export class Events extends Component {
     //     });
     // }
 
+    //trying to implement a filter
+
+    // onFilterChange = ({ filters }) => {
+    //     this.setState({ filters });
+    //   }
+    
+    
+
     render() {
         return (
             <div className="mt-3">
-
-                <Search />
+               
+                {/* <Search filterEvents={this.filterEvents} />  */}
                 <div className="mt-5 mb-5">
                     <Link to="/CreateEvent">
                         <button type="button" class="btn btn-warning">Create new event</button>
@@ -74,15 +88,17 @@ export class Events extends Component {
 
                 {
                     this.state.events.map((elem) => {
+                        
                         return (
                             <div class="card-deck m-5">
+                                
                                 <div class="card">
                                     <div className="mt-3" >
                                         <div className="image">
-                                            <img width="300px" height="200px" className="img-rounded mx-auto d-block" src="https://area51.co/wp-content/grand-media/image/linkedin_ice_cave.jpg" alt="event img"></img>
+                                            <img width="300px" height="200px" className="img-rounded mx-auto d-block" src="https://s27389.pcdn.co/wp-content/uploads/2018/07/tech-events-diary-1024x440.jpg" alt=""></img>
                                         </div>
                                         <div class="col-md-12 text-center">
-                                        <h5>{elem.date}</h5>
+                                        <h5>{elem.date.dateYMD }</h5>
                                             <h3>{elem.name}</h3>
                                         </div>
                                         <h4>Topic of the day: {elem.topics}</h4>
@@ -92,7 +108,7 @@ export class Events extends Component {
                                         <h5>{elem.createdby.username}</h5>
                                         <div className="mt-4 mb-4">
                                             <Link to={`/event/${elem._id}`}>
-                                                <button type="button" class="btn btn-warning">I am interested!</button>
+                                                <button type="button" class="btn btn-outline-warning">I am interested!</button>
                                             </Link>
                                         </div>
                                     </div>

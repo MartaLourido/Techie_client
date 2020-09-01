@@ -30,9 +30,9 @@ export class EventCard extends Component {
 
             <div className="container">
 
-                <div className="card" style={{ width: '18rem' }}>
+                <div className="card" style={{ width: '30rem' }}>
                     <div className="col-md-12">
-                        <img width="75px" height="75px" className="rounded" className="eventImg" src="https://1yfd8w35xqq41q3ou63czp8h-wpengine.netdna-ssl.com/wp-content/uploads/2019/12/350x215-FEAT-in-post-eventtech.jpg" alt="event img"></img>
+                    <img width="300px" height="200px" className="img-rounded mx-auto d-block" src="https://s27389.pcdn.co/wp-content/uploads/2018/07/tech-events-diary-1024x440.jpg" alt=""></img>
                     </div>
                     <div class="col-md-12">
                         <h3>{this.state.event.name}</h3>
@@ -40,6 +40,7 @@ export class EventCard extends Component {
                     <h4>{this.state.event.topics}</h4>
                     <h5>{this.state.event.place}</h5>
                     <p>{this.state.event.NumberOfPeople}</p>
+                    <p>{this.state.event.description}</p>
                     <h5>{this.state.event.createdby.username}</h5>
                     <div className="card body">
 
@@ -55,6 +56,7 @@ export class EventCard extends Component {
                     <Link to="/events">
                         <button type="button" class="btn btn-warning">Go Back</button>
                     </Link>
+                    
                 </div>
             </div>
         )
