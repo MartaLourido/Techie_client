@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CommentPanel from './CommentPanel'
 import {API_URL} from '../config' 
 import axios from 'axios'
+import {Card} from 'react-bootstrap'
 
 export class Feed extends Component {
 
@@ -68,10 +69,11 @@ export class Feed extends Component {
         return (
             <div>
                 <div className="input-comment-box">
-
+                     <Card body>
                     <input className="form-control col-md-5" name="description" type="text" placeholder="Write your comment here "
                         onChange={(e) => this.handleTextChange(e)}
                     />
+                    </Card>
 
                     <button className="btn btn-primary"
                         onClick={() => this.sendComment()}

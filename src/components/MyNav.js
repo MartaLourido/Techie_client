@@ -3,7 +3,7 @@ import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer,
   MDBIcon
 } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
 // import * as mdb from 'mdb-ui-kit'; // lib
 // import { Input } from 'mdb-ui-kit'; // module
 
@@ -49,6 +49,7 @@ class MyNav extends Component {
                       <MDBNavItem>
                         <MDBNavLink to="/Events">Events</MDBNavLink>
                       </MDBNavItem>
+
                       <button onClick={this.props.onLogout}>Logout</button>
                     </>
                   ) : (

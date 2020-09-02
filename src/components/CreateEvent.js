@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { API_URL } from '../config';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
+
 
 class CreateEvent extends Component {
     constructor(props) {
@@ -125,7 +126,7 @@ class CreateEvent extends Component {
                         
                     </div> */}
                     <div>
-                        <img src={this.state.image} />
+                        <img src={this.state.image} alt="" />
                         <h5>Select Image</h5>
                         <input type="file" name="myImage" onChange={this.onImageChange} />
                     </div>

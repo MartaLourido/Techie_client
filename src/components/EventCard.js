@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import axios from "axios"
-import Events from './Events'
 import { API_URL } from '../config';
-import { Redirect, Link } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { Button, Modal } from 'react-bootstrap';
 
 export class EventCard extends Component {
     // constructor(props) {
     //     super(props)
     state = {
         event: { createdby: "" },
-        eventId: this.props.match.params.id
+        eventId: this.props.match.params.id,
+        show: false,
     }
     // }
 
@@ -25,6 +25,19 @@ export class EventCard extends Component {
             .catch(error => console.log(error))
     }
 
+    //modal
+
+    handleClose = () => 
+    this.setState({
+        show: false
+    });
+    
+ 
+    handleShow = () => 
+    this.setState({
+        show: true
+    });
+
     render() {
         return (
 
@@ -32,7 +45,7 @@ export class EventCard extends Component {
 
                 <div className="card" style={{ width: '30rem' }}>
                     <div className="col-md-12">
-                    <img width="300px" height="200px" className="img-rounded mx-auto d-block" src="https://s27389.pcdn.co/wp-content/uploads/2018/07/tech-events-diary-1024x440.jpg" alt=""></img>
+                        <img width="300px" height="200px" className="img-rounded mx-auto d-block" src="https://s27389.pcdn.co/wp-content/uploads/2018/07/tech-events-diary-1024x440.jpg" alt=""></img>
                     </div>
                     <div class="col-md-12">
                         <h3>{this.state.event.name}</h3>
@@ -45,9 +58,11 @@ export class EventCard extends Component {
                     <div className="card body">
 
 
-                        <Link to="/AttendEvent">
-                            <button type="button" class="btn btn-warning">Attend this event</button>
-                        </Link>
+
+                        <Button variant="primary" onClick={this.handleShow}>
+                           Attend Event
+                        </Button>
+
 
                     </div>
 
@@ -56,8 +71,22 @@ export class EventCard extends Component {
                     <Link to="/events">
                         <button type="button" class="btn btn-warning">Go Back</button>
                     </Link>
-                    
+
                 </div>
+                <>
+
+                    <Modal show={this.state.show} onHide={this.handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Confirmation</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Woohoo, you're attending this event!</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </>
             </div>
         )
     }

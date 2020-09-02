@@ -15,8 +15,10 @@ import Events from './components/Events'
 import EditProfile from './components/EditProfile';
 import EventCard from './components/EventCard'
 import CreateEvent from './components/CreateEvent';
-import AttendEvent from './components/AttendEvent'
-var moment = require('moment');
+import Footer from './components/Footer'
+import 'semantic-ui-css/semantic.min.css'
+import NavBar from './components/NavBar'
+import ExampleCard from './components/ExampleCard'
 
 class App extends React.Component {
 
@@ -104,16 +106,11 @@ class App extends React.Component {
       <div className="App">
 
 
-        <nav className="navbar navbar-dark bg-dark">
-          <a className="navbar-brand" href="/">
-            <img src="logo.png" height="100" className="d-inline-block align-top" alt="" loading="lazy" />
-              
-          </a>
-        </nav>
-
-        <MyNav loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} >
+        {/* <MyNav loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} >
       
-        </MyNav>
+        </MyNav> */}
+        <NavBar loggedInUser={this.state.loggedInUser} onLogout={this.handleLogOut} >
+        </NavBar>
         <Switch >
           <Route exact path="/" render={(routeProps) => {
             return <Home {...routeProps} />
@@ -142,10 +139,13 @@ class App extends React.Component {
            <Route exact path="/event/:id" render={(routeProps) => {
             return <EventCard {...routeProps} />
           }} />
-           <Route exact path="/AttendEvent" render={(routeProps) => {
-            return <AttendEvent {...routeProps} />
+
+          <Route exact path="/ExampleCard" render={(routeProps) => {
+            return <ExampleCard {...routeProps} />
           }} />
+   
         </Switch>
+        <Footer/>
       </div>
     );
   }
