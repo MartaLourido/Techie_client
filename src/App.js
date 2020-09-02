@@ -131,7 +131,7 @@ class App extends React.Component {
             return <EditProfile loggedInUser={this.state.loggedInUser} {...routeProps} />
           }} />
            <Route exact path="/events" render={(routeProps) => {
-            return <Events {...routeProps} />
+            return <Events loggedInUser={this.state.loggedInUser} {...routeProps} />
           }} />
            <Route exact path="/createvent" render={(routeProps) => {
             return <CreateEvent {...routeProps} />

@@ -26,9 +26,13 @@ export class Events extends Component {
     componentDidMount() {
         axios.get(`${API_URL}/events`, { withCredentials: true })
             .then((res) => {
-                this.setState({
-                    events: res.data,
-                    filteredEvents: res.data,
+                axios.get(`${API_URL}/user`, { withCredentials: true })
+                .then((user) => {
+                    this.setState({
+                        events: res.data,
+                        filteredEvents: res.data,
+                       loggedInUser: user.data
+                    })
                 })
             })
             .catch((err) => {
@@ -75,8 +79,9 @@ export class Events extends Component {
 
     //filter by event that i created 
     handleMyEvents = (e) => {
+        console.log(this.state.loggedInUser)
         let filteredEvents = this.state.events.filter((event) => {
-            return event.createdby._id === this.state.loggedInUser._id
+            return event.createdby === this.state.loggedInUser._id
         })
         this.setState({
             filteredEvents: filteredEvents
@@ -212,7 +217,7 @@ export class Events extends Component {
                 </nav>
                 <div className="mt-5 mb-5">
 
-                    <Link to="/CreateEvent">
+                    <Link to="/createvent">
                         <button type="button" class="btn btn-warning">Create new event</button>
                     </Link>
 

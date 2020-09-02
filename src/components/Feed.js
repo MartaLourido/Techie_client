@@ -71,6 +71,7 @@ export class Feed extends Component {
             <div>
                 <div className="container-fluid">
                          <Card body>
+                             
                     <input className="form-control col-md-16" name="description" type="text" placeholder="Write your comment here "
                         onChange={(e) => this.handleTextChange(e)}
                     />
