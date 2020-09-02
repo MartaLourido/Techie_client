@@ -14,11 +14,11 @@ class CommentPanel extends Component {
         doShowSubComments: false,
         newComment: '',
         feed: { createdby: "" }, //for show the name of the user who creates it
-        
+
 
     }
 
-    
+
 
     clickLikes() {
         axios.put(`${API_URL}/feed/${this.props.feed._id}/addlike`, {}, { withCredentials: true })
@@ -68,37 +68,41 @@ class CommentPanel extends Component {
                     <input onChange={this.updateNewComment} className="form-control col-md-5" />
                     <button onClick={() => this.props.addComment(this.props.feed._id, this.state.newComment)} className="btn btn-success">New Comment</button>
                 </div> */}
-                <div className="comment-list">
-                    <ul>
-                        {
-                            this.props.feed.comments.map((elem) => {
-                                return (
-                                    <Comment.Group>
+                <div className="comment-list mt-4">
+                    <>
+                        <Comment.Group>
+                            {
+                                this.props.feed.comments.map((elem) => {
+                                    return (
+
 
 
                                         <Comment>
-                                            <Comment.Avatar as='a' src='https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg' />
+                                            <Comment.Avatar as='a' src={elem.userAvatar} />
                                             <Comment.Content>
-                                                {/* <Comment.Author>created by {elem.createdby.username}</Comment.Author> */}
+                                                <Comment.Author>created by {elem.createdby.username}</Comment.Author>
                                                 <Comment.Metadata>
-                                                    <div>{moment(this.state.feed.createAt).format('DD/MM/YYYY')}</div>
+                                                    <div>{moment(elem.createAt).format('DD/MM/YYYY')}</div>
                                                 </Comment.Metadata>
                                                 <Comment.Text>{elem.comment}</Comment.Text>
                                                 <Comment.Actions>
-                                                    <Comment.Action>Reply</Comment.Action>
+                                                    {/* <Comment.Action>Reply</Comment.Action> */}
                                                 </Comment.Actions>
                                             </Comment.Content>
                                         </Comment>
 
-                                        <Form reply>
-                                            <Form.TextArea onChange={this.updateNewComment} />
-                                            <Button onClick={() => this.props.addComment(this.props.feed._id, this.state.newComment)} content='Add Comment' labelPosition='left' icon='edit' primary />
-                                        </Form>
-                                    </Comment.Group>
-                                )
-                            })
-                        }
-                    </ul>
+
+
+                                    )
+
+                                })
+                            }
+                        </Comment.Group>
+                        <Form reply>
+                            <Form.TextArea onChange={this.updateNewComment} />
+                            <Button onClick={() => this.props.addComment(this.props.feed._id, this.state.newComment)} content='Add Comment' labelPosition='left' icon='edit' primary />
+                        </Form>
+                    </>
                 </div>
             </div>
         )

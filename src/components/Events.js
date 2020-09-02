@@ -10,6 +10,7 @@ import EditEvent from './EditEvent'
 
 
 export class Events extends Component {
+    
 
     state = {
         events: [],
@@ -26,6 +27,24 @@ export class Events extends Component {
     //get the events
 
     componentDidMount() {
+        this.getEvents();
+    }
+
+    showTheEvent() {
+        axios.post(`${API_URL}/event`, { withCredentials: true })
+            .then(() => {
+                return (
+                    <Redirect to='/EventCard' />
+                )
+            })
+            .catch((err) => {
+                console.log('An error ocurred: ' + err);
+            })
+    }
+
+
+    //when you edit a event, then get the event edited
+    getEvents() {
         axios.get(`${API_URL}/events`, { withCredentials: true })
             .then((res) => {
                 axios.get(`${API_URL}/user`, { withCredentials: true })
@@ -42,18 +61,7 @@ export class Events extends Component {
                     this.props.history.push('/')
                 }
             })
-    }
 
-    showTheEvent() {
-        axios.post(`${API_URL}/event`, { withCredentials: true })
-            .then(() => {
-                return (
-                    <Redirect to='/EventCard' />
-                )
-            })
-            .catch((err) => {
-                console.log('An error ocurred: ' + err);
-            })
     }
 
 
@@ -100,26 +108,37 @@ export class Events extends Component {
 
     //delete an event that you created
 
-    handleDelete = (id) => {
+    // handleDelete = (id) => {
 
-        let newEvent = this.state.events.filter((event) => {
-            return event.createdby.username !== this.state.loggedInUser._id
-        })
+    //     let newEvent = this.state.events.filter((event) => {
+    //         return event.createdby.username !== this.state.loggedInUser._id
+    //     })
 
-        this.setState({
-            events: newEvent
-        }, () => {
-            this.props.history.push('/events')
-        })
-        console.log(this.state.events)
+    //     this.setState({
+    //         events: newEvent
+    //     }, () => {
+    //         this.props.history.push('/events')
+    //     })
+    //     console.log(this.state.events)
+    // }
+
+    handleDelete = (e) => {
+        // e.preventDefault()
+        console.log(e.target.getAttribute("data"))
+       let id = e.target.getAttribute("data")
+        axios.delete(`${API_URL}/event/${id}/delete`, { withCredentials: true })
+            .then(() => {
+
+
+                this.getEvents()
+            })
     }
-
 
     //Edit a event that you created 
 
     handleEdit = (event) => {
         console.log(event)
-        this.setState ({
+        this.setState({
             showEditEvent: true,
         })
 
@@ -166,8 +185,8 @@ export class Events extends Component {
 
                 <nav class="navbar navbar-light bg-light justify-content-between">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search"
-                            className="input"
+                        <input type="text" placeholder="search an event" aria-label="search"
+                            className="input form-control mr-sm-2"
                             value={this.state.input}
                             onChange={this.handleSearch}
                         />
@@ -238,14 +257,15 @@ export class Events extends Component {
                                 <div className="mt-4 mb-4">
 
 
+
                                     {
-                                        this.props.loggedInUser ? (
+                                        this.props.loggedInUser._id === elem.createdby ? (
                                             <div>
                                                 <h5>You have been created this event!</h5>
-                                                <button type="button" class="btn btn-outline-warning" onClick={this.handleDelete}>Delete</button>
+                                                <button data={elem._id} type="button" class="btn btn-outline-warning" onClick={this.handleDelete}>Delete</button>
 
                                                 {/* <Link to="/events/edit"> */}
-                                                    <button type="button" class="btn btn-outline-warning" onClick={this.handleEdit}>Edit</button>
+                                                <button type="button" class="btn btn-outline-warning" onClick={this.handleEdit}>Edit</button>
                                                 {/* </Link> */}
 
 
@@ -257,10 +277,10 @@ export class Events extends Component {
                                     }
                                 </div>
                                 {/*  con el showEditEvent hacemos que se muestre el form en el edit event, despues con el onclose hacemos que se cierre con lo que hemos editado guardandolo*/}
-                                { this.state.showEditEvent &&
-                                    <EditEvent 
-                                        event={elem} 
-                                        onClose={ ()=> this.setState({ showEditEvent: false })}
+                                {this.state.showEditEvent &&
+                                    <EditEvent
+                                        event={elem}
+                                        onClose={() => {this.setState({ showEditEvent: false }); this.getEvents()}} 
                                     />
                                 }
                             </div>

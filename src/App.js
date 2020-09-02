@@ -143,7 +143,7 @@ console.log( '----------------------', email.value)
            <Route exact path="/events/edit" render={(routeProps) => {
             return <EditEvent {...routeProps} />
           }} />
-
+          
         
    
         </Switch>

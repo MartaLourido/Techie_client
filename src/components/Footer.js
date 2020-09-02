@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
+import {Grid, Header} from  'semantic-ui-react'
 
 export class Footer extends Component {
     render() {
         return (
-            <div>
-                {/* <span className="footer-text">Created by Marta Lourido &copy; {new Date().getFullYear()}</span> */}
-
-            </div>
+            <Grid.Column width={7}>
+            <Header as='h4' inverted>
+              Footer Header
+            </Header>
+            <p>
+              {/* Extra space for a call to action inside the footer that could help re-engage users. */}
+            </p>
+          </Grid.Column>
         )
     }
 }

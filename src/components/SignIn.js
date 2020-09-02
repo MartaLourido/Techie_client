@@ -6,7 +6,7 @@ export default function SignIn(props) {
 
     return (
         <>
-            <div>
+            {/* <div>
                 <Message
                     attached
                     header='Login'
@@ -24,7 +24,7 @@ export default function SignIn(props) {
                     <Icon name='help' />
         &nbsp;Don't have an account yet?<br></br><a href='/signup'>Sign Up</a>&nbsp;instead.
       </Message>
-            </div>
+            </div> */}
 
             <form onSubmit={props.onSignIn}>
                 <div className="form-group">

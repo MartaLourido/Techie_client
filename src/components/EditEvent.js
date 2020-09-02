@@ -52,7 +52,7 @@ export default class EditEvent extends React.Component {
 
     handleimageChange = (e) => {
         let eventEdited = JSON.parse(JSON.stringify(this.state.event))
-        eventEdited.eventimage = e.target.value
+        eventEdited.image = e.target.value
 
         this.setState({
             event: eventEdited
@@ -96,7 +96,7 @@ export default class EditEvent extends React.Component {
                     </div>
                     <div class="form-group">
                         <label htmlFor="image">image</label>
-                        <input type="text" class="form-control" onChange={this.handleAvatarChange} name="image" id="image" value={image} />
+                        <input type="text" class="form-control" onChange={this.handleimageChange} name="image" id="image" value={image} />
                     </div>
                     <div class="form-group">
                         <label htmlFor="city">City</label>
