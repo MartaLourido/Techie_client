@@ -55,7 +55,8 @@ export class EventCard extends Component {
                             <Card.Description> 📍 {this.state.event.place}, {this.state.event.city}</Card.Description>
                             <Card.Meta>
                                 <h4>{this.state.event.topics}</h4>
-                                <span className='date'>created by {this.state.event.createdby.username}</span>
+                                <span className='text'>created by {this.state.event.createdby.username}</span>
+                               
                             </Card.Meta>
                             <Card.Description>
 
@@ -65,7 +66,7 @@ export class EventCard extends Component {
                         <Card.Content extra>
                             <a>
                                 <Icon name='user' />
-                                {this.state.event.NumberOfPeople}
+                                {this.state.event.numberOfPeople}
                             </a>
                         </Card.Content>
                         

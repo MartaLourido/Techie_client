@@ -48,7 +48,7 @@ class App extends React.Component {
   handleSignIn = (e) => {
     e.preventDefault();
     const { email, password } = e.currentTarget;
-
+console.log( '----------------------', email.value)
     axios.post(`${API_URL}/signin`, {
       email: email.value,
       password: password.value

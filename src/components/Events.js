@@ -4,6 +4,7 @@ import { API_URL } from '../config'
 import { Redirect, Link } from 'react-router-dom';
 import moment from 'moment';
 import { Card, CardGroup } from 'react-bootstrap'
+import EditEvent from './EditEvent'
 
 // import SearchEvent from './SearchEvent'
 
@@ -17,6 +18,7 @@ export class Events extends Component {
         cities: ["", "Madrid", "Amsterdam", "Stockholm", "Barcelona"],
         filteredEvents: [],
         loggedInUser: null,
+        showEditEvent: false,
 
 
     }
@@ -37,7 +39,7 @@ export class Events extends Component {
             })
             .catch((err) => {
                 if (err.response.status === 401) {
-                    this.props.history.push('/signin')
+                    this.props.history.push('/')
                 }
             })
     }
@@ -115,21 +117,25 @@ export class Events extends Component {
 
     //Edit a event that you created 
 
-    handleEdit = (e) => {
-        e.preventDefault();
-        let id = this.props.match.params.id
-        axios.put(`${API_URL}/events/${id}/edit`, { withCredentials: true },
-            {
-                name: this.state.events.name,
-                information: this.state.events.information,
-                topics: this.state.events.topics
+    handleEdit = (event) => {
+        console.log(event)
+        this.setState ({
+            showEditEvent: true,
+        })
 
-            })
-            .then((res) => {
-                return (
-                    <Redirect to='/events' />
-                )
-            })
+        // let id = this.props.match.params.id
+        // axios.put(`${API_URL}/events/${id}/edit`, { withCredentials: true },
+        //     {
+        //         name: this.state.events.name,
+        //         information: this.state.events.information,
+        //         topics: this.state.events.topics
+
+        //     })
+        //     .then((res) => {
+        //         return (
+        //             <Redirect to='/events' />
+        //         )
+        //     })
     }
 
     // handleSubmit = (e) => {
@@ -238,9 +244,10 @@ export class Events extends Component {
                                                 <h5>You have been created this event!</h5>
                                                 <button type="button" class="btn btn-outline-warning" onClick={this.handleDelete}>Delete</button>
 
-                                                <Link to="/events/edit">
+                                                {/* <Link to="/events/edit"> */}
                                                     <button type="button" class="btn btn-outline-warning" onClick={this.handleEdit}>Edit</button>
-                                                </Link>
+                                                {/* </Link> */}
+
 
 
                                             </div>
@@ -249,6 +256,13 @@ export class Events extends Component {
 
                                     }
                                 </div>
+                                {/*  con el showEditEvent hacemos que se muestre el form en el edit event, despues con el onclose hacemos que se cierre con lo que hemos editado guardandolo*/}
+                                { this.state.showEditEvent &&
+                                    <EditEvent 
+                                        event={elem} 
+                                        onClose={ ()=> this.setState({ showEditEvent: false })}
+                                    />
+                                }
                             </div>
 
 

@@ -6,21 +6,21 @@ import { Redirect } from 'react-router-dom';
 export default class EditEvent extends React.Component {
 
     state = {
-        event: {}
+        event: this.props.event
     }
     componentDidMount() {
-        axios.get(`${API_URL}/events`, { withCredentials: true })
-            .then((res) => {
-                this.setState({
-                    event: res.data
-                })
-            })
+        // axios.get(`${API_URL}/events`, { withCredentials: true })
+        //     .then((res) => {
+        //         this.setState({
+        //             event: res.data
+        //         })
+        //     })
     }
 
     handleEdit = (e) => {
         console.log(this.state.event)
         e.preventDefault();
-        axios.put(`${API_URL}/events/edit`, {
+        axios.put(`${API_URL}/event/${ this.state.event._id }/edit`, {
             name: this.state.event.name,
             topics: this.state.event.topics,
             image: this.state.event.image,
@@ -28,7 +28,7 @@ export default class EditEvent extends React.Component {
         }, { withCredentials: true })
             .then((res) => {
                 console.log(res)
-                this.props.history.push("/events");
+                this.props.onClose() //para que se cierre el form del edit
             });
     }
 
@@ -50,9 +50,9 @@ export default class EditEvent extends React.Component {
         })
     }
 
-    handleAvatarChange = (e) => {
+    handleimageChange = (e) => {
         let eventEdited = JSON.parse(JSON.stringify(this.state.event))
-        eventEdited.eventAvatar = e.target.value
+        eventEdited.eventimage = e.target.value
 
         this.setState({
             event: eventEdited
@@ -69,19 +69,19 @@ export default class EditEvent extends React.Component {
     }
 
     render() {
-        if (!this.props.loggedInevent) {
-            return <Redirect to='/signin' />
-        }
-        if (!this.state.event) {
-            return (
-                <div class="text-center">
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
-            )
-        }
-        const { name, topics, eventAvatar, city } = this.state.event
+        // if (!this.props.loggedInUser) {
+        //     return <Redirect to='/signin' />
+        // }
+        // if (!this.state.event) {
+        //     return (
+        //         <div class="text-center">
+        //             <div class="spinner-border" role="status">
+        //                 <span class="sr-only">Loading...</span>
+        //             </div>
+        //         </div>
+        //     )
+        // }
+        const { name, topics, image, city } = this.state.event
         return (
             <>
                 <form >
@@ -95,8 +95,8 @@ export default class EditEvent extends React.Component {
                         <input type="text" class="form-control" onChange={this.handletopicsChange} name="topics" id="topics" value={topics} />
                     </div>
                     <div class="form-group">
-                        <label htmlFor="eventAvatar">Avatar</label>
-                        <input type="text" class="form-control" onChange={this.handleAvatarChange} name="avatar" id="avatar" value={eventAvatar} />
+                        <label htmlFor="image">image</label>
+                        <input type="text" class="form-control" onChange={this.handleAvatarChange} name="image" id="image" value={image} />
                     </div>
                     <div class="form-group">
                         <label htmlFor="city">City</label>

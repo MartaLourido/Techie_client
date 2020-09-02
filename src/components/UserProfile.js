@@ -21,66 +21,67 @@ class UserProfile extends Component {
 
         axios.get(`${API_URL}/profile`, { withCredentials: true })
             .then((res) => {
+                console.log('+++++++++++++++++++++++++++++++++++++++', res.data)
                 this.setState({
                     user: res.data
                 })
 
             })
             .catch((err) => {
-                console.log('An error ocurred: ' + err);
+                console.error('An error ocurred: ' + err);
             })
     }
 
-    // handleDelete = (id) => {
-    //     axios.delete(`${API_URL}/profile/delete`, { withCredentials: true })
-    //         .then(() => {
+    handleDelete = (id) => {
+        axios.delete(`${API_URL}/profile/delete`, { withCredentials: true })
+            .then(() => {
+                // console.log(this.state.user)
+                // let filteredUser = this.state.user.filter((user) => {
+                //     return user._id !== user.session.loggedInUser._id
+                // })
 
-    //             let filteredUser = this.state.user.filter((user) => {
-    //                 return user._id !== user.session.loggedInUser._id
-    //             })
+                this.setState({
+                    user: null
+                })
 
-    //             this.setState({
-    //                 user: filteredUser
-    //             }, () => {
-    //                 this.props.history.push('/Home')
-    //             })
-
-    //         })
-    // }
+                this.props.history.push('/')
+            })
+    }
 
 
     render() {
         console.log(this.state.user)
         return (
             <Container fluid>
-                <Card centered>
-                    <Image src='https://pickaface.net/gallery/avatar/alae.harti5381250d2c781.png' wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header> {this.state.user.username}</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>Joined in 2020</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            Email: {this.state.user.email}
-                            <br></br>
-                        City: {this.state.user.city}
-                        </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                   
+                {this.state.user &&
+                    <Card centered>
+                        <Image src={this.state.user.userAvatar} wrapped ui={false} />
+                        <Card.Content>
+                            <Card.Header> {this.state.user.username}</Card.Header>
+                            <Card.Meta>
+                                <span className='date'>Joined in 2020</span>
+                            </Card.Meta>
+                            <Card.Description>
+                                Email: {this.state.user.email}
+                                <br></br>
+                            City: {this.state.user.city}
+                            </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+
                             <Icon name='user' />
                             {/* 22 Friends */}
-                     
-                    </Card.Content>
-                    <Link to="/user/edit">
-                        <button type="button" class="btn btn-warning">Edit Profile</button>
-                    </Link>
-                    <Link to="/signup">
-                    <button className="btn btn-dark mt-3" > Delete Profile </button>
-                    {/* <button className="btn btn-dark mt-3" onClick={() => this.handleDelete()} > Delete Profile </button> */}
-                    </Link>
-                </Card>
-                
+
+                        </Card.Content>
+                        <Link to="/user/edit">
+                            <button type="button" class="btn btn-warning">Edit Profile</button>
+                        </Link>
+
+
+                        <button className="btn btn-dark mt-3" onClick={() => this.handleDelete()} > Delete Profile </button>
+
+                    </Card>
+                }
             </Container>
         )
 
