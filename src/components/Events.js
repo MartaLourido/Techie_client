@@ -27,13 +27,13 @@ export class Events extends Component {
         axios.get(`${API_URL}/events`, { withCredentials: true })
             .then((res) => {
                 axios.get(`${API_URL}/user`, { withCredentials: true })
-                .then((user) => {
-                    this.setState({
-                        events: res.data,
-                        filteredEvents: res.data,
-                       loggedInUser: user.data
+                    .then((user) => {
+                        this.setState({
+                            events: res.data,
+                            filteredEvents: res.data,
+                            loggedInUser: user.data
+                        })
                     })
-                })
             })
             .catch((err) => {
                 if (err.response.status === 401) {
@@ -96,41 +96,18 @@ export class Events extends Component {
     }
 
 
-
-    // //method for sort by city and topic
-
-    // sortEvents = field => {
-    //     // copy of state as not to mutate original
-    //     const sortedEvents = [...this.state.firstVisibleEvents];
-    //     // different sort based on field parameter (reduced syntax for both)
-    //     if (field === 'city') sortedEvents.sort((a, b) => b.city > a.city ? -1 : 1) // sort for strings
-    //     else if (field === 'topic') sortedEvents.sort((a, b) => b.topic > a.topic ? -1 : 1)
-
-    //     // setting the state with the sorted array
-    //     this.setState({
-    //         firstVisibleEvents: sortedEvents
-    //     });
-    // }
-
-    //trying to implement a filter
-
-    // onFilterChange = ({ filters }) => {
-    //     this.setState({ filters });
-    //   }
-
-
     //delete an event that you created
 
     handleDelete = (id) => {
 
         let newEvent = this.state.events.filter((event) => {
-            return event.createdby.username !== id
+            return event.createdby.username !== this.state.loggedInUser._id
         })
 
         this.setState({
             events: newEvent
         }, () => {
-            this.props.history.push('/Events')
+            this.props.history.push('/events')
         })
         console.log(this.state.events)
     }
@@ -141,7 +118,7 @@ export class Events extends Component {
     handleEdit = (e) => {
         e.preventDefault();
         let id = this.props.match.params.id
-        axios.patch(`${API_URL}/event/${id}`, { withCredentials: true },
+        axios.put(`${API_URL}/events/${id}/edit`, { withCredentials: true },
             {
                 name: this.state.events.name,
                 information: this.state.events.information,
@@ -165,7 +142,7 @@ export class Events extends Component {
     //         })
     //         .catch((err) => {
     //             if (err.response.status === 401) {
-    //                 this.props.history.push('/Events')
+    //                 this.props.history.push('/events')
     //             }
     //         })
     // }
@@ -192,7 +169,7 @@ export class Events extends Component {
                     </form>
                     <button type="button" class="btn btn-danger" onClick={this.handleMyEvents}>My Events</button>
                     <button type="button" class="btn btn-secondary" onClick={this.handleAllEvents}>All the Events</button>
-                    <div class="form-group">
+                    {/* <div class="form-group">
                         <label for="exampleFormControlSelect1">Cities</label>
 
                         <select class="form-control"
@@ -213,7 +190,7 @@ export class Events extends Component {
                             }
 
                         </select>
-                    </div>
+                    </div> */}
                 </nav>
                 <div className="mt-5 mb-5">
 
@@ -232,7 +209,7 @@ export class Events extends Component {
                             <div>
                                 <CardGroup>
                                     <Card>
-                                        <Card.Img variant="top" src="https://s27389.pcdn.co/wp-content/uploads/2018/07/tech-events-diary-1024x440.jpg" alt="" />
+                                        <Card.Img variant="top" src={elem.image} alt="" />
                                         <Card.Body>
                                             <Card.Title>{elem.name}</Card.Title>
                                             <Card.Text>
@@ -258,11 +235,13 @@ export class Events extends Component {
                                     {
                                         this.props.loggedInUser ? (
                                             <div>
-
+                                                <h5>You have been created this event!</h5>
                                                 <button type="button" class="btn btn-outline-warning" onClick={this.handleDelete}>Delete</button>
 
+                                                <Link to="/events/edit">
+                                                    <button type="button" class="btn btn-outline-warning" onClick={this.handleEdit}>Edit</button>
+                                                </Link>
 
-                                                <button type="button" class="btn btn-outline-warning" onClick={this.handleEdit}>Edit</button>
 
                                             </div>
 

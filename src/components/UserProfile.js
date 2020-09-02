@@ -31,22 +31,22 @@ class UserProfile extends Component {
             })
     }
 
-    handleDelete = (id) => {
-        axios.delete(`${API_URL}/profile/${id}`, { withCredentials: true })
-            .then(() => {
+    // handleDelete = (id) => {
+    //     axios.delete(`${API_URL}/profile/delete`, { withCredentials: true })
+    //         .then(() => {
 
-                let filteredUser = this.state.user.filter((user) => {
-                    return user._id !== id
-                })
+    //             let filteredUser = this.state.user.filter((user) => {
+    //                 return user._id !== user.session.loggedInUser._id
+    //             })
 
-                this.setState({
-                    user: filteredUser
-                }, () => {
-                    this.props.history.push('/Home')
-                })
+    //             this.setState({
+    //                 user: filteredUser
+    //             }, () => {
+    //                 this.props.history.push('/Home')
+    //             })
 
-            })
-    }
+    //         })
+    // }
 
 
     render() {
@@ -75,7 +75,10 @@ class UserProfile extends Component {
                     <Link to="/user/edit">
                         <button type="button" class="btn btn-warning">Edit Profile</button>
                     </Link>
-                    <button className="btn btn-dark mt-3" onClick={() => this.handleDelete()} > Delete Profile </button>
+                    <Link to="/signup">
+                    <button className="btn btn-dark mt-3" > Delete Profile </button>
+                    {/* <button className="btn btn-dark mt-3" onClick={() => this.handleDelete()} > Delete Profile </button> */}
+                    </Link>
                 </Card>
                 
             </Container>

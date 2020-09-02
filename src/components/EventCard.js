@@ -68,6 +68,7 @@ export class EventCard extends Component {
                                 {this.state.event.NumberOfPeople}
                             </a>
                         </Card.Content>
+                        
                         <Button variant="primary" onClick={this.handleShow}>
                             Attend Event
                         </Button>

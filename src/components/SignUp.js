@@ -17,6 +17,8 @@ export default function SignUp(props){
         <Form.Input label='Username' placeholder='Username' type='text'name='username' />
         <Form.Input label='Email' placeholder='Email' type='Email' name='email'/>
         <Form.Input label='Password' type='password' name="password" />
+        <Form.Input label='User Avatar' type='url' name="avatar" />
+
         <Form.Checkbox inline label='I agree to the terms and conditions' />
         <Button type="submit" color='yellow'>Submit</Button>
       </Form>

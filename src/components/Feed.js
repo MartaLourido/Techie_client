@@ -70,8 +70,8 @@ export class Feed extends Component {
         return (
             <div>
                 <div className="container-fluid">
-                         <Card body>
-                             
+                    <div clasName = "mt-5">
+                         <Card body centered>
                     <input className="form-control col-md-16" name="description" type="text" placeholder="Write your comment here "
                         onChange={(e) => this.handleTextChange(e)}
                     />
@@ -81,7 +81,7 @@ export class Feed extends Component {
                         Comment
                     </button>
                     </Card>
-
+                    </div>
                     {/* <button className="btn btn-primary"
                         onClick={() => this.sendComment()}
                     >

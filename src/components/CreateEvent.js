@@ -114,6 +114,16 @@ class CreateEvent extends Component {
                             value={this.state.information}
                             onChange={this.handleInput}
                         />
+                         <label for="Image">Image </label>
+                        <input
+                            type="url"
+                            name="image"
+                            className="form-control"
+                            value={this.state.image}
+                            onChange={this.handleInput}
+                            
+                        />
+                       
 
 
                     </div>
@@ -125,11 +135,11 @@ class CreateEvent extends Component {
                         <label class="custom-file-label" for="image">Choose image</label>
                         
                     </div> */}
-                    <div>
+                    {/* <div>
                         <img src={this.state.image} alt="" />
-                        <h5>Select Image</h5>
-                        <input type="file" name="myImage" onChange={this.onImageChange} />
-                    </div>
+                        <h5>Charge Image</h5>
+                        <input type="url" name="myImage" onChange={this.onImageChange} />
+                    </div> */}
 
                     <button type="submit" class="btn btn-warning mt-3">Save</button>
                 </form>

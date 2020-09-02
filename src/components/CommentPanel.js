@@ -13,9 +13,12 @@ class CommentPanel extends Component {
         comments: this.props.feed.comments,
         doShowSubComments: false,
         newComment: '',
+        feed: { createdby: "" }, //for show the name of the user who creates it
         
 
     }
+
+    
 
     clickLikes() {
         axios.put(`${API_URL}/feed/${this.props.feed._id}/addlike`, {}, { withCredentials: true })
@@ -58,6 +61,7 @@ class CommentPanel extends Component {
     }
 
     showSubComments() {
+        console.log("running showSubComments")
         return (
             <div>
                 {/* <div className="col-md-6">
@@ -70,32 +74,14 @@ class CommentPanel extends Component {
                             this.props.feed.comments.map((elem) => {
                                 return (
                                     <Comment.Group>
-                                        <Comment>
-                                            <Comment.Avatar as='a' src='/images/avatar/small/joe.jpg' />
-                                            <Comment.Content>
-                                                <Comment.Author>Joe Henderson</Comment.Author>
-                                                <Comment.Metadata>
-                                                    <div>
 
-                                                    </div>
-                                                </Comment.Metadata>
-                                                <Comment.Text>
-                                                    <p>
-                                                        {elem.comment}
-                                                    </p>
-                                                </Comment.Text>
-                                                <Comment.Actions>
-                                                    <Comment.Action>Reply</Comment.Action>
-                                                </Comment.Actions>
-                                            </Comment.Content>
-                                        </Comment>
 
                                         <Comment>
-                                            <Comment.Avatar as='a' src='/images/avatar/small/christian.jpg' />
+                                            <Comment.Avatar as='a' src='https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg' />
                                             <Comment.Content>
-                                                <Comment.Author>{this.props.feed.username}</Comment.Author>
+                                                {/* <Comment.Author>created by {elem.createdby.username}</Comment.Author> */}
                                                 <Comment.Metadata>
-                                                    <div>{Date.now()}</div>
+                                                    <div>{moment(this.state.feed.createAt).format('DD/MM/YYYY')}</div>
                                                 </Comment.Metadata>
                                                 <Comment.Text>{elem.comment}</Comment.Text>
                                                 <Comment.Actions>
@@ -120,7 +106,9 @@ class CommentPanel extends Component {
     }
 
     comments() {
+        console.log("comment clicked")
         const { doShowSubComments } = this.state
+        console.log(doShowSubComments)
         return (
             <div>
                 <span>

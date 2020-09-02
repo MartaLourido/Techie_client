@@ -18,6 +18,7 @@ import CreateEvent from './components/CreateEvent';
 import Footer from './components/Footer'
 import 'semantic-ui-css/semantic.min.css'
 import NavBar from './components/NavBar'
+import EditEvent from './components/EditEvent'
 
 
 class App extends React.Component {
@@ -138,6 +139,9 @@ class App extends React.Component {
           }} />
            <Route exact path="/event/:id" render={(routeProps) => {
             return <EventCard {...routeProps} />
+          }} />
+           <Route exact path="/events/edit" render={(routeProps) => {
+            return <EditEvent {...routeProps} />
           }} />
 
         
