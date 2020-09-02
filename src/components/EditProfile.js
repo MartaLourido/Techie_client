@@ -70,7 +70,7 @@ export default class EditProfile extends React.Component {
 
     render() {
         if (!this.props.loggedInUser) {
-            return <Redirect to='/SignIn' />
+            return <Redirect to='/signin' />
         }
         if (!this.state.user) {
             return (

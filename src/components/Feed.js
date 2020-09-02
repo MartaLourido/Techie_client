@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import CommentPanel from './CommentPanel'
 import {API_URL} from '../config' 
 import axios from 'axios'
-import {Card} from 'react-bootstrap'
+import { Card } from 'semantic-ui-react'
 
 export class Feed extends Component {
 
     state = {
         description: "",
         feeds: [],
+        feed: { createdby: "" },
       }
    
     componentDidMount() {
@@ -68,18 +69,23 @@ export class Feed extends Component {
     render() {
         return (
             <div>
-                <div className="input-comment-box">
-                     <Card body>
-                    <input className="form-control col-md-5" name="description" type="text" placeholder="Write your comment here "
+                <div className="container-fluid">
+                         <Card body>
+                    <input className="form-control col-md-16" name="description" type="text" placeholder="Write your comment here "
                         onChange={(e) => this.handleTextChange(e)}
                     />
-                    </Card>
-
-                    <button className="btn btn-primary"
+                     <button className="btn btn-warning"
                         onClick={() => this.sendComment()}
                     >
                         Comment
                     </button>
+                    </Card>
+
+                    {/* <button className="btn btn-primary"
+                        onClick={() => this.sendComment()}
+                    >
+                        Comment
+                    </button> */}
                 </div>
                 <div className="comment-list">
                     <ul>

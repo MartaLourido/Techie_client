@@ -67,16 +67,17 @@ class UserProfile extends Component {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
+                   
                             <Icon name='user' />
                             {/* 22 Friends */}
-                        </a>
+                     
                     </Card.Content>
                     <Link to="/user/edit">
                         <button type="button" class="btn btn-warning">Edit Profile</button>
                     </Link>
                     <button className="btn btn-dark mt-3" onClick={() => this.handleDelete()} > Delete Profile </button>
                 </Card>
+                
             </Container>
         )
 

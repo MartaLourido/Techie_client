@@ -17,7 +17,7 @@ class CreateEvent extends Component {
             city: "",
             image: null,
             date: new Date(),
-            description: "",
+            information: "",
         };
 
         this.onImageChange = this.onImageChange.bind(this);
@@ -25,8 +25,8 @@ class CreateEvent extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { name, date, place, topics, numberOfPeople, city, image, description } = this.state;
-        axios.post(`${API_URL}/event/create`, { name: name, date: date, place: place, topics: topics, numberOfPeople: numberOfPeople, city: city, image: image, description: description }, { withCredentials: true })
+        const { name, date, place, topics, numberOfPeople, city, image, information } = this.state;
+        axios.post(`${API_URL}/event/create`, { name: name, date: date, place: place, topics: topics, numberOfPeople: numberOfPeople, city: city, image: image, information: information }, { withCredentials: true })
             .then(res => {
                 this.props.history.push('/events')
             })
@@ -53,7 +53,7 @@ class CreateEvent extends Component {
   
     render() {
         return (
-            <div className="container">
+            <div className="container mt-5">
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="form-group row">
@@ -106,12 +106,12 @@ class CreateEvent extends Component {
                             value={this.state.place}
                             onChange={this.handleInput}
                         />
-                           <label for="Place">Description </label>
+                           <label for="Place">information </label>
                         <input
-                            type="description"
-                            name="description"
+                            type="information"
+                            name="information"
                             className="form-control"
-                            value={this.state.description}
+                            value={this.state.information}
                             onChange={this.handleInput}
                         />
 
@@ -133,7 +133,7 @@ class CreateEvent extends Component {
 
                     <button type="submit" class="btn btn-warning mt-3">Save</button>
                 </form>
-                <Link to="/Events">
+                <Link to="/events">
                     <button type="button" className="btn btn-secondary mt-2">Go back</button>
                 </Link>
             </div>

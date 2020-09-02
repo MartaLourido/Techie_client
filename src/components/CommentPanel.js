@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { API_URL } from '../config'
 import ReactLinkify from 'react-linkify'
+import { Button, Comment, Form } from 'semantic-ui-react'
+import moment from 'moment'
+
+import Clock from 'moment'
 
 class CommentPanel extends Component {
     state = {
@@ -9,6 +13,7 @@ class CommentPanel extends Component {
         comments: this.props.feed.comments,
         doShowSubComments: false,
         newComment: '',
+        
 
     }
 
@@ -17,7 +22,7 @@ class CommentPanel extends Component {
             .then(() => {
                 this.setState({
                     likesCounter: this.state.likesCounter + 1
-                  
+
                 })
             })
             .catch((err) => {
@@ -25,15 +30,15 @@ class CommentPanel extends Component {
             })
     }
 
-    
 
 
-//      // method to show/hide form to add new comments
-//   handleClick = () => {
-//     this.setState({
-//       form: !this.state.form
-//     });
-//   };
+
+    //      // method to show/hide form to add new comments
+    //   handleClick = () => {
+    //     this.setState({
+    //       form: !this.state.form
+    //     });
+    //   };
 
     clickComment() {
         // showComments
@@ -51,20 +56,59 @@ class CommentPanel extends Component {
             newComment: e.target.value
         })
     }
-    
+
     showSubComments() {
         return (
             <div>
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                     <input onChange={this.updateNewComment} className="form-control col-md-5" />
                     <button onClick={() => this.props.addComment(this.props.feed._id, this.state.newComment)} className="btn btn-success">New Comment</button>
-                </div>
+                </div> */}
                 <div className="comment-list">
                     <ul>
                         {
                             this.props.feed.comments.map((elem) => {
                                 return (
-                                    <li>{elem.comment}</li>
+                                    <Comment.Group>
+                                        <Comment>
+                                            <Comment.Avatar as='a' src='/images/avatar/small/joe.jpg' />
+                                            <Comment.Content>
+                                                <Comment.Author>Joe Henderson</Comment.Author>
+                                                <Comment.Metadata>
+                                                    <div>
+
+                                                    </div>
+                                                </Comment.Metadata>
+                                                <Comment.Text>
+                                                    <p>
+                                                        {elem.comment}
+                                                    </p>
+                                                </Comment.Text>
+                                                <Comment.Actions>
+                                                    <Comment.Action>Reply</Comment.Action>
+                                                </Comment.Actions>
+                                            </Comment.Content>
+                                        </Comment>
+
+                                        <Comment>
+                                            <Comment.Avatar as='a' src='/images/avatar/small/christian.jpg' />
+                                            <Comment.Content>
+                                                <Comment.Author>{this.props.feed.username}</Comment.Author>
+                                                <Comment.Metadata>
+                                                    <div>{Date.now()}</div>
+                                                </Comment.Metadata>
+                                                <Comment.Text>{elem.comment}</Comment.Text>
+                                                <Comment.Actions>
+                                                    <Comment.Action>Reply</Comment.Action>
+                                                </Comment.Actions>
+                                            </Comment.Content>
+                                        </Comment>
+
+                                        <Form reply>
+                                            <Form.TextArea onChange={this.updateNewComment} />
+                                            <Button onClick={() => this.props.addComment(this.props.feed._id, this.state.newComment)} content='Add Comment' labelPosition='left' icon='edit' primary />
+                                        </Form>
+                                    </Comment.Group>
                                 )
                             })
                         }
@@ -90,8 +134,7 @@ class CommentPanel extends Component {
     render() {
         const { feed } = this.props
         const { likesCounter } = this.state
-        const text = this.state.liked ? 'liked' : 'haven\'t liked';
-        const label = this.state.liked ? 'Unlike' : 'Like'
+
 
         return (
             <div className="mt-3 ml-3" key={feed._id}>
@@ -102,16 +145,22 @@ class CommentPanel extends Component {
 
                     <div class="text-left col-md-10">
                         {/* <h2 class="featurette-heading">{feed.name}</h2> */}
-                       <ReactLinkify> {feed.description} </ReactLinkify>
+                        <ReactLinkify> {feed.description} </ReactLinkify>
                     </div>
                 </div>
 
                 <div className="row">
                     <div className="col-md-2">
-                        <button className= "btn btn-danger">{likesCounter}</button>
+                        {/* <button className="btn btn-danger">{likesCounter}</button>
                         <button className="btn btn-danger ml-4" onClick={() => this.clickLikes()}><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg></button>
+                        </svg></button> */}
+                        <Button onClick={() => this.clickLikes()}
+                            color='red'
+                            content='Like'
+                            icon='heart'
+                            label={{ basic: true, color: 'red', pointing: 'left', content: <div>{likesCounter}</div> }}
+                        />
                     </div>
                     <div className="col-md-10  text-left">
                         {this.comments()}

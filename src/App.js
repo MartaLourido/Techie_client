@@ -5,7 +5,7 @@ import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import { Route, withRouter, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css'
-import MyNav from './components/MyNav'
+// import MyNav from './components/MyNav'
 import axios from 'axios'
 import { API_URL } from './config'
 import Home from './components/Home'
@@ -18,7 +18,7 @@ import CreateEvent from './components/CreateEvent';
 import Footer from './components/Footer'
 import 'semantic-ui-css/semantic.min.css'
 import NavBar from './components/NavBar'
-import ExampleCard from './components/ExampleCard'
+
 
 class App extends React.Component {
 
@@ -115,13 +115,13 @@ class App extends React.Component {
           <Route exact path="/" render={(routeProps) => {
             return <Home {...routeProps} />
           }} />
-          <Route exact path="/SignIn" render={(routeProps) => {
+          <Route exact path="/signin" render={(routeProps) => {
             return <SignIn onSignIn={this.handleSignIn} {...routeProps} />
           }} />
-          <Route exact path="/SignUp" render={(routeProps) => {
+          <Route exact path="/signup" render={(routeProps) => {
             return <SignUp onSignUp={this.handleSignUp} {...routeProps} />
           }} />
-          <Route exact path="/Feed" render={(routeProps) => {
+          <Route exact path="/feed" render={(routeProps) => {
             return <Feed {...routeProps} />
           }} />
           <Route exact path="/user" render={(routeProps) => {
@@ -133,16 +133,14 @@ class App extends React.Component {
            <Route exact path="/events" render={(routeProps) => {
             return <Events {...routeProps} />
           }} />
-           <Route exact path="/CreateEvent" render={(routeProps) => {
+           <Route exact path="/createvent" render={(routeProps) => {
             return <CreateEvent {...routeProps} />
           }} />
            <Route exact path="/event/:id" render={(routeProps) => {
             return <EventCard {...routeProps} />
           }} />
 
-          <Route exact path="/ExampleCard" render={(routeProps) => {
-            return <ExampleCard {...routeProps} />
-          }} />
+        
    
         </Switch>
         <Footer/>

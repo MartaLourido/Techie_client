@@ -41,13 +41,13 @@ class MyNav extends Component {
                   this.props.loggedInUser ? (
                     <>
                       <MDBNavItem>
-                        <MDBNavLink to="/User">My profile</MDBNavLink>
+                        <MDBNavLink to="/user">My profile</MDBNavLink>
                       </MDBNavItem>
                       <MDBNavItem>
-                        <MDBNavLink to="/Feed">Feed</MDBNavLink>
+                        <MDBNavLink to="/feed">Feed</MDBNavLink>
                       </MDBNavItem>
                       <MDBNavItem>
-                        <MDBNavLink to="/Events">Events</MDBNavLink>
+                        <MDBNavLink to="/events">Events</MDBNavLink>
                       </MDBNavItem>
 
                       <button onClick={this.props.onLogout}>Logout</button>
@@ -55,10 +55,10 @@ class MyNav extends Component {
                   ) : (
                       <>
                         <MDBNavItem>
-                          <MDBNavLink to="/SignIn">SignIn</MDBNavLink>
+                          <MDBNavLink to="/signin">SignIn</MDBNavLink>
                         </MDBNavItem>
                         <MDBNavItem>
-                          <MDBNavLink to="/SignUp">SignUp</MDBNavLink>
+                          <MDBNavLink to="/signup">SignUp</MDBNavLink>
                         </MDBNavItem>
                       </>)
                 }

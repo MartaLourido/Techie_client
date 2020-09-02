@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { API_URL } from '../config'
 import { Redirect, Link } from 'react-router-dom';
-import moment from 'moment'
+import moment from 'moment';
+import { Card, CardGroup } from 'react-bootstrap'
 
 // import SearchEvent from './SearchEvent'
 
@@ -14,7 +15,8 @@ export class Events extends Component {
         // filteredEvents: events
         image: "",
         cities: ["", "Madrid", "Amsterdam", "Stockholm", "Barcelona"],
-
+        filteredEvents: [],
+        loggedInUser: null,
 
 
     }
@@ -25,12 +27,13 @@ export class Events extends Component {
         axios.get(`${API_URL}/events`, { withCredentials: true })
             .then((res) => {
                 this.setState({
-                    events: res.data
+                    events: res.data,
+                    filteredEvents: res.data,
                 })
             })
             .catch((err) => {
                 if (err.response.status === 401) {
-                    this.props.history.push('/SignIn')
+                    this.props.history.push('/signin')
                 }
             })
     }
@@ -47,45 +50,45 @@ export class Events extends Component {
             })
     }
 
-    //       // method for the search filter functionality. Invoked in Search.
-    filterEvents = input => {
-        const filtered = this.state.events.filter(el => el.name.toLowerCase().includes(input.toLowerCase()));
-        this.setState({ filtered });
-    };
 
     //search by city, name or topic
 
     handleSearch = (e) => {
         // e.preventDefault(e)
+
         let searchText = e.currentTarget.value
         let filteredAll = this.state.events.filter((event) => {
+            console.log(event)
             return (
+
                 event.city.toLowerCase().includes(searchText.toLowerCase())
                 || event.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                event.topic.toLowerCase().includes(searchText.toLowerCase())
+                event.topics.toLowerCase().includes(searchText.toLowerCase())
             )
         })
         this.setState({
-            events: filteredAll
+            filteredEvents: filteredAll
+
+        })
+
+    }
+
+    //filter by event that i created 
+    handleMyEvents = (e) => {
+        let filteredEvents = this.state.events.filter((event) => {
+            return event.createdby._id === this.state.loggedInUser._id
+        })
+        this.setState({
+            filteredEvents: filteredEvents
 
         })
     }
 
-    // //filter by city
-    // handleSearchCity = (e) => {
-
-    //     console.log(e.currentTarget.value)
-    //     let searchCity = e.currentTarget.value
-    //     let filteredCities = this.state.events.filter((event) => {
-    //         return (
-    //             event.city.toLowerCase().includes(searchCity.toLowerCase())
-    //         )
-    //     })
-    //     this.setState({
-    //         cities: filteredCities
-
-    //     })
-    // }
+    handleAllEvents = () => {
+        this.setState({
+            filteredEvents: this.state.events
+        })
+    }
 
 
 
@@ -120,7 +123,7 @@ export class Events extends Component {
         })
 
         this.setState({
-            todos: newEvent
+            events: newEvent
         }, () => {
             this.props.history.push('/Events')
         })
@@ -136,13 +139,13 @@ export class Events extends Component {
         axios.patch(`${API_URL}/event/${id}`, { withCredentials: true },
             {
                 name: this.state.events.name,
-                description: this.state.events.description,
+                information: this.state.events.information,
                 topics: this.state.events.topics
 
             })
             .then((res) => {
                 return (
-                    <Redirect to='/Events' />
+                    <Redirect to='/events' />
                 )
             })
     }
@@ -167,6 +170,8 @@ export class Events extends Component {
 
     render() {
 
+
+
         return (
             <div className="mt-3">
 
@@ -180,6 +185,8 @@ export class Events extends Component {
                         />
 
                     </form>
+                    <button type="button" class="btn btn-danger" onClick={this.handleMyEvents}>My Events</button>
+                    <button type="button" class="btn btn-secondary" onClick={this.handleAllEvents}>All the Events</button>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Cities</label>
 
@@ -192,7 +199,7 @@ export class Events extends Component {
                         >
 
                             {
-                                this.state.events.map((elem) => {
+                                this.state.filteredEvents.map((elem) => {
                                     return (
                                         <option value={elem}>{elem.city}</option>
                                     )
@@ -212,59 +219,61 @@ export class Events extends Component {
                 </div>
 
                 {
-                    this.state.events.map((elem) => {
+                    this.state.filteredEvents.map((elem) => {
 
                         return (
 
 
+                            <div>
+                                <CardGroup>
+                                    <Card>
+                                        <Card.Img variant="top" src="https://s27389.pcdn.co/wp-content/uploads/2018/07/tech-events-diary-1024x440.jpg" alt="" />
+                                        <Card.Body>
+                                            <Card.Title>{elem.name}</Card.Title>
+                                            <Card.Text>
+                                                <h5>{moment(elem.date).format('DD/MM/YYYY')}</h5>
+                                                <h4>Topic of the day: {elem.topics}</h4>
+                                                <h4><span>📍</span>{elem.city}</h4>
 
-                            <div class="card-deck m-5">
+                                            </Card.Text>
+                                        </Card.Body>
+                                        <Card.Footer>
 
-                                <div class="card">
-                                    <div className="mt-3" >
-                                        <div className="image">
-                                            <img width="300px" height="200px" className="img-rounded mx-auto d-block" src="https://s27389.pcdn.co/wp-content/uploads/2018/07/tech-events-diary-1024x440.jpg" alt=""></img>
-                                        </div>
-                                        <div class="col-md-12 text-center">
-                                            <h5>{moment(elem.date).format('DD/MM/YYYY')}</h5>
-                                            {/* {moment(this.props.dateToFormat).format('YYYY/MM/DD')} */}
-                                        
-
-                                        </div>
-                                        <h4>Topic of the day: {elem.topics}</h4>
-                                        <h4><span>📍</span>{elem.city}</h4>
-                                        {/* <h5>{elem.place}</h5> */}
-                                        {/* <p>{elem.numberOfPeople}</p> */}
-                                        <h5>{elem.createdby.username}</h5>
-                                        <div className="mt-4 mb-4">
                                             <Link to={`/event/${elem._id}`}>
                                                 <button type="button" class="btn btn-outline-warning">I am interested!</button>
                                             </Link>
+                                        </Card.Footer>
 
-                                            {
-                                                this.props.loggedInUser ? (
-                                                    <div>
-                                                        <Link to={`/event/${elem._id}`}>
-                                                            <button type="button" class="btn btn-outline-warning" onClick={this.handleDelete}>Delete</button>
-                                                        </Link>
-                                                        <Link to={`/event/${elem._id}`}>
-                                                            <button type="button" class="btn btn-outline-warning" onClick={this.handleEdit}>Edit</button>
-                                                        </Link>
-                                                    </div>
+                                    </Card>
+                                </CardGroup>
 
-                                                ) : ""
+                                <div className="mt-4 mb-4">
 
-                                            }
-                                        </div>
-                                    </div>
 
+                                    {
+                                        this.props.loggedInUser ? (
+                                            <div>
+
+                                                <button type="button" class="btn btn-outline-warning" onClick={this.handleDelete}>Delete</button>
+
+
+                                                <button type="button" class="btn btn-outline-warning" onClick={this.handleEdit}>Edit</button>
+
+                                            </div>
+
+                                        ) : ""
+
+                                    }
                                 </div>
                             </div>
+
+
+
                         )
                     })
                 }
 
-            </div>
+            </div >
 
 
         )

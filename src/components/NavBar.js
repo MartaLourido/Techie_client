@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
 export class NavBar extends Component {
     render() {
@@ -21,14 +21,14 @@ export class NavBar extends Component {
                                 this.props.loggedInUser ? (
                                     <>
                                         <NavDropdown title="Profile" id="collasible-nav-dropdown">
-                                            <NavDropdown.Item href="/User">My Profile</NavDropdown.Item>
+                                            <NavDropdown.Item href="/user">My Profile</NavDropdown.Item>
                                             <NavDropdown.Divider />
 
                                         </NavDropdown>
                                         <Nav>
-                                            <Nav.Link href="/Feed">Feed</Nav.Link>
-                                            <Nav.Link href="/Events">Events</Nav.Link>
-                                            <Nav.Link href="/ExampleCard">Card</Nav.Link>
+                                            <Nav.Link href="/feed">Feed</Nav.Link>
+                                            <Nav.Link href="/events">Events</Nav.Link>
+                                          
                                         </Nav>
 
                                         <button onClick={this.props.onLogout}>Logout</button>
@@ -36,8 +36,8 @@ export class NavBar extends Component {
                                 ) : (
                                         <>
                                             <Nav>
-                                                <Nav.Link href="/SignIn">Sign In</Nav.Link>
-                                                <Nav.Link href="/SignUp">Sign Up</Nav.Link>
+                                                <Nav.Link href="/signin">Sign In</Nav.Link>
+                                                <Nav.Link href="/signup">Sign Up</Nav.Link>
 
 
                                             </Nav>
