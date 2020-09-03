@@ -13,6 +13,7 @@ export class EventCard extends Component {
         event: { createdby: "" },
         eventId: this.props.match.params.id,
         show: false,
+        text: 'Attend event',
     }
     // }
 
@@ -37,9 +38,16 @@ export class EventCard extends Component {
 
     handleShow = () =>
         this.setState({
-            show: true
+            show: true,
+            text: "Attended"
+           
         });
 
+    // ChangeText = (text) => {
+    //     this.setState ({
+            
+    //     })
+    // }    
     render() {
         return (
 
@@ -48,7 +56,8 @@ export class EventCard extends Component {
                 <Container fluid>
                     <Card centered>
 
-                        <Image src='https://agcdn-2mrybbgckm7omi0k.netdna-ssl.com/wp-content/uploads/2018/05/alphagamma-best-US-tech-events-you-cant-miss-in-2018-entrepreneurship-001-1024x509.png' wrapped ui={false} />
+                        <Image src=
+                        {this.state.event.image} wrapped ui={false} />
                         <Card.Content>
                             <h5>{moment(this.state.event.date).format('DD/MM/YYYY')}</h5>
                             <Card.Header>{this.state.event.name}</Card.Header>
@@ -71,7 +80,7 @@ export class EventCard extends Component {
                         </Card.Content>
                         
                         <Button variant="primary" onClick={this.handleShow}>
-                            Attend Event
+                            {this.state.text}
                         </Button>
 
                     </Card>

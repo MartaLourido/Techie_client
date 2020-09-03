@@ -20,7 +20,7 @@ export default function SignUp(props){
         <Form.Input label='User Avatar' type='url' name="avatar" />
 
         <Form.Checkbox inline label='I agree to the terms and conditions' />
-        <Button type="submit" color='yellow'>Submit</Button>
+        <Button type="submit" color='yellow'>Register now!</Button>
       </Form>
       
       <Message attached='bottom' warning>

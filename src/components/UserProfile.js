@@ -54,7 +54,7 @@ class UserProfile extends Component {
         return (
             <Container fluid>
                 {this.state.user &&
-                    <Card centered>
+                    <Card centered margin>
                         <Image src={this.state.user.userAvatar} wrapped ui={false} />
                         <Card.Content>
                             <Card.Header> {this.state.user.username}</Card.Header>

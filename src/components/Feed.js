@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CommentPanel from './CommentPanel'
 import { API_URL } from '../config'
 import axios from 'axios'
-import { Card } from 'semantic-ui-react'
+import { Card, Segment, Resp } from 'semantic-ui-react'
 
 export class Feed extends Component {
 
@@ -66,41 +66,44 @@ export class Feed extends Component {
         })
     }
 
+
     render() {
+
         return (
-            <div>
-                <div className="container-fluid">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <h5 class="card-header">Wall</h5>
-                                <div class="card-body">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="wallInput" class="sr-only" placeholder="Write something">Write something</label>
-                                            <textarea class="form-control" id="wallInput" rows="2" name="description" placeholder="Write your comment here "
-                                                onChange={(e) => this.handleTextChange(e)}></textarea>
-                                        </div>
+            <Segment.Group>
+                <div>
+                    <div className="container-fluid">
+                        <div class="row mt-5">
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <h5 class="card-header">Welcome , what do you want to share today?</h5>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="wallInput" class="sr-only" placeholder="Write something">Write something</label>
+                                                <textarea class="form-control" id="wallInput" rows="2" name="description" placeholder="Write your comment here "
+                                                    onChange={(e) => this.handleTextChange(e)}></textarea>
+                                            </div>
 
-                                        <button className="btn btn-warning"
-                                            onClick={() => this.sendComment()}
-                                        >
-                                            Post
+                                            <button className="btn btn-warning"
+                                                onClick={() => this.sendComment()}
+                                            >
+                                                Post
                     </button>
-                                    </form>
+                                        </form>
 
-                                    <div class="float-right">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Text</button>
-                                            <button type="button" class="btn btn-secondary"><i class="far fa-image"></i> Photo</button>
-                                            <button type="button" class="btn btn-secondary"><i class="fas fa-video"></i> Video</button>
+                                        <div class="float-right">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Text</button>
+                                                <button type="button" class="btn btn-secondary"><i class="far fa-image"></i> Photo</button>
+                                                <button type="button" class="btn btn-secondary"><i class="fas fa-video"></i> Video</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {/* <div clasName="mt-5"> */}
+                        {/* <div clasName="mt-5"> */}
                         {/* <Card body centered>
                             <input className="form-control col-md-16" name="description" type="text" placeholder="Write your comment here "
                                 onChange={(e) => this.handleTextChange(e)}
@@ -112,14 +115,14 @@ export class Feed extends Component {
                     </button>
                         </Card>
                     </div> */}
-                    {/* <button className="btn btn-primary"
+                        {/* <button className="btn btn-primary"
                         onClick={() => this.sendComment()}
                     >
                         Comment
                     </button> */}
-                </div>
-                <div className="comment-list">
-                    <ul>
+                    </div>
+                    <div className="comment-list">
+
                         {
                             this.state.feeds.map((elem) => {
                                 return (
@@ -127,10 +130,10 @@ export class Feed extends Component {
                                 )
                             })
                         }
-                    </ul>
-                </div>
-            </div>
 
+                    </div>
+                </div>
+            </Segment.Group>
         )
     }
 }

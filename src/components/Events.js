@@ -231,7 +231,7 @@ export class Events extends Component {
                         return (
 
 
-                            <div>
+                            <div className>
                                 <CardGroup>
                                     <Card>
                                         <Card.Img variant="top" src={elem.image} alt="" />
