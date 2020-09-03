@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { API_URL } from '../config';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import { Responsive, Segment } from 'semantic-ui-react'
+import {Container, Row} from 'react-bootstrap'
 
 
 class CreateEvent extends Component {
@@ -50,83 +52,85 @@ class CreateEvent extends Component {
         }
     };
 
-  
+
     render() {
         return (
-            <div className="container mt-5">
+            <Responsive as={Segment} minWidth={320} maxWidth={2559}>
                 <form onSubmit={this.handleSubmit}>
+                    <Container fluid="md">
+                        <Row>
+                            <div className="form-group row">
+                                <label for="name">Name</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.handleInput}
+                                />
+                                <label for="Date">Date</label>
+                                <input
+                                    type="date"
+                                    name="date"
+                                    value={this.state.date}
+                                    onChange={this.handleInput}
+                                    className="form-control"
+                                />
 
-                    <div className="form-group row">
-                        <label for="name">Name</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="name"
-                            value={this.state.name}
-                            onChange={this.handleInput}
-                        />
-                        <label for="Date">Date</label>
-                        <input
-                            type="date"
-                            name="date"
-                            value={this.state.date}
-                            onChange={this.handleInput}
-                            className="form-control"
-                        />
+                                <label for="Topics">Topics</label>
+                                <input
+                                    type="text"
+                                    name="topics"
+                                    value={this.state.topics}
+                                    onChange={this.handleInput}
+                                    className="form-control"
+                                />
+                                <label for="NumberOfPeople">Number of people</label>
+                                <input
+                                    type="number"
+                                    name='numberOfPeople'
+                                    className="form-control"
+                                    value={this.state.numberOfPeople}
+                                    onChange={this.handleInput}
+                                />
+                                <label for="City">City</label>
+                                <input
+                                    type="text"
+                                    name="city"
+                                    className="form-control"
+                                    value={this.state.city}
+                                    onChange={this.handleInput}
+                                />
+                                <label for="Place">Place </label>
+                                <input
+                                    type="text"
+                                    name="place"
+                                    className="form-control"
+                                    value={this.state.place}
+                                    onChange={this.handleInput}
+                                />
+                                <label for="Place">information </label>
+                                <input
+                                    type="information"
+                                    name="information"
+                                    className="form-control"
+                                    value={this.state.information}
+                                    onChange={this.handleInput}
+                                />
+                                <label for="Image">Image </label>
+                                <input
+                                    type="url"
+                                    name="image"
+                                    className="form-control"
+                                    value={this.state.image}
+                                    onChange={this.handleInput}
 
-                        <label for="Topics">Topics</label>
-                        <input
-                            type="text"
-                            name="topics"
-                            value={this.state.topics}
-                            onChange={this.handleInput}
-                            className="form-control"
-                        />
-                        <label for="NumberOfPeople">Number of people</label>
-                        <input
-                            type="number"
-                            name='numberOfPeople'
-                            className="form-control"
-                            value={this.state.numberOfPeople}
-                            onChange={this.handleInput}
-                        />
-                        <label for="City">City</label>
-                        <input
-                            type="text"
-                            name="city"
-                            className="form-control"
-                            value={this.state.city}
-                            onChange={this.handleInput}
-                        />
-                        <label for="Place">Place </label>
-                        <input
-                            type="text"
-                            name="place"
-                            className="form-control"
-                            value={this.state.place}
-                            onChange={this.handleInput}
-                        />
-                           <label for="Place">information </label>
-                        <input
-                            type="information"
-                            name="information"
-                            className="form-control"
-                            value={this.state.information}
-                            onChange={this.handleInput}
-                        />
-                         <label for="Image">Image </label>
-                        <input
-                            type="url"
-                            name="image"
-                            className="form-control"
-                            value={this.state.image}
-                            onChange={this.handleInput}
-                            
-                        />
-                       
+                                />
+                            </div>
+                        </Row>
+                    </Container>
 
 
-                    </div>
                     {/* <div class="custom-file mt-3" >
                         <input type="file" class="custom-file-input" id="image"
                             value={this.state.image}
@@ -146,7 +150,7 @@ class CreateEvent extends Component {
                 <Link to="/events">
                     <button type="button" className="btn btn-secondary mt-2">Go back</button>
                 </Link>
-            </div>
+            </Responsive>
         );
     }
 }

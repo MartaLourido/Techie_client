@@ -7,15 +7,14 @@ import { Card, Icon, Image, Grid, Container } from 'semantic-ui-react'
 import moment from 'moment'
 
 export class EventCard extends Component {
-    // constructor(props) {
-    //     super(props)
+  
     state = {
         event: { createdby: "" },
         eventId: this.props.match.params.id,
         show: false,
         text: 'Attend event',
     }
-    // }
+    
 
     componentDidMount() {
         axios.get(`${API_URL}/event/${this.props.match.params.id}`, { withCredentials: true })
@@ -35,6 +34,7 @@ export class EventCard extends Component {
             show: false
         });
 
+    //added the text Attended for change the button when you press in Attend (Setted in the state)    
 
     handleShow = () =>
         this.setState({
@@ -43,11 +43,7 @@ export class EventCard extends Component {
            
         });
 
-    // ChangeText = (text) => {
-    //     this.setState ({
-            
-    //     })
-    // }    
+ 
     render() {
         return (
 

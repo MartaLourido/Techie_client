@@ -106,21 +106,7 @@ export class Events extends Component {
     }
 
 
-    //delete an event that you created
 
-    // handleDelete = (id) => {
-
-    //     let newEvent = this.state.events.filter((event) => {
-    //         return event.createdby.username !== this.state.loggedInUser._id
-    //     })
-
-    //     this.setState({
-    //         events: newEvent
-    //     }, () => {
-    //         this.props.history.push('/events')
-    //     })
-    //     console.log(this.state.events)
-    // }
 
     handleDelete = (e) => {
         // e.preventDefault()
@@ -142,36 +128,8 @@ export class Events extends Component {
             showEditEvent: true,
         })
 
-        // let id = this.props.match.params.id
-        // axios.put(`${API_URL}/events/${id}/edit`, { withCredentials: true },
-        //     {
-        //         name: this.state.events.name,
-        //         information: this.state.events.information,
-        //         topics: this.state.events.topics
-
-        //     })
-        //     .then((res) => {
-        //         return (
-        //             <Redirect to='/events' />
-        //         )
-        //     })
+    
     }
-
-    // handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     axios.get(`${API_URL}/events/search`,{searchText: searchText} { withCredentials: true })
-    //         .then((res) => {
-    //             this.setState({
-    //                 events: res.data
-    //             })
-    //         })
-    //         .catch((err) => {
-    //             if (err.response.status === 401) {
-    //                 this.props.history.push('/events')
-    //             }
-    //         })
-    // }
-
 
 
 
@@ -185,37 +143,18 @@ export class Events extends Component {
 
                 <nav class="navbar navbar-light bg-light justify-content-between">
                     <form class="form-inline">
-                        <input type="text" placeholder="search an event" aria-label="search"
+                        <input type="text" icon='search' placeholder="search an event" aria-label="search" 
                             className="input form-control mr-sm-2"
                             value={this.state.input}
                             onChange={this.handleSearch}
                         />
 
                     </form>
+                    < div className = "row mr-4">
                     <button type="button" class="btn btn-danger" onClick={this.handleMyEvents}>My Events</button>
                     <button type="button" class="btn btn-secondary" onClick={this.handleAllEvents}>All the Events</button>
-                    {/* <div class="form-group">
-                        <label for="exampleFormControlSelect1">Cities</label>
-
-                        <select class="form-control"
-                            value={this.state.cities}
-                            onChange={this.handleSearchCity}
-                            id="city"
-                            name="city"
-
-                        >
-
-                            {
-                                this.state.filteredEvents.map((elem) => {
-                                    return (
-                                        <option value={elem}>{elem.city}</option>
-                                    )
-
-                                })
-                            }
-
-                        </select>
-                    </div> */}
+                    </div>
+                    
                 </nav>
                 <div className="mt-5 mb-5">
 
@@ -232,8 +171,8 @@ export class Events extends Component {
 
 
                             <div className>
-                                <CardGroup>
-                                    <Card>
+                                <CardGroup centered>
+                                    <Card centered>
                                         <Card.Img variant="top" src={elem.image} alt="" />
                                         <Card.Body>
                                             <Card.Title>{elem.name}</Card.Title>

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios'
 import { API_URL } from '../config'
 import { Redirect } from 'react-router-dom';
+import { Responsive, Segment } from 'semantic-ui-react'
 
 export default class EditProfile extends React.Component {
 
@@ -84,7 +85,7 @@ export default class EditProfile extends React.Component {
         const { username, email, userAvatar, city } = this.state.user
         return (
             <>
-                <form >
+                 <Responsive as={Segment} minWidth={320} maxWidth={2559}>
                     <div class="form-group">
                         <label htmlFor="name">Username</label>
                         <input type="text" class="form-control"
@@ -105,7 +106,7 @@ export default class EditProfile extends React.Component {
 
                     <button type="button" class="btn btn-danger" onClick={this.handleEdit}>Edit Profile</button>
 
-                </form>
+                    </Responsive>
             </>
         )
     }

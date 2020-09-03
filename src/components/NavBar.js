@@ -10,7 +10,7 @@ export class NavBar extends Component {
                         <img src="logo.png" height="100" className="d-inline-block align-top" alt="" loading="lazy" />
 
                     </a>
-                    <Navbar.Brand href="#home">Welcome to Techie</Navbar.Brand>
+                    {/* <Navbar.Brand href="#home">Welcome to Techie</Navbar.Brand> */}
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">

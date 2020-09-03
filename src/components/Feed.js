@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CommentPanel from './CommentPanel'
 import { API_URL } from '../config'
 import axios from 'axios'
-import { Card, Segment, Resp } from 'semantic-ui-react'
+import { Card, Container } from 'semantic-ui-react'
 
 export class Feed extends Component {
 
@@ -10,6 +10,7 @@ export class Feed extends Component {
         description: "",
         feeds: [],
         feed: { createdby: "" },
+        
     }
 
     componentDidMount() {
@@ -35,7 +36,7 @@ export class Feed extends Component {
      * Enviar al servidor
      */
     sendComment() {
-        axios.post(`${API_URL}/feed/create`, { description: this.state.description }, { withCredentials: true })
+        axios.post(`${API_URL}/feed/create`, { description: this.state.description, typeComment: this.state.typeComment,  }, { withCredentials: true })
             .then(() => {
                 this.getFeed();
             })
@@ -66,74 +67,82 @@ export class Feed extends Component {
         })
     }
 
+    //Button text, video and image, these functions will make the buttons only show for each type of text, making also a ternary conditional in EventsCards(155)
+    handleButtonText(){
+        this.setState({
+            typeComment: "text"
+        })
+    }
 
+    handleButtonVideo(){
+        this.setState({
+            typeComment: "video"
+        })
+    }
+
+    handleButtonImage(){
+        this.setState({
+            typeComment: "image"
+        })
+    }
+
+  
     render() {
 
         return (
-            <Segment.Group>
-                <div>
-                    <div className="container-fluid">
-                        <div class="row mt-5">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <h5 class="card-header">Welcome , what do you want to share today?</h5>
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="wallInput" class="sr-only" placeholder="Write something">Write something</label>
-                                                <textarea class="form-control" id="wallInput" rows="2" name="description" placeholder="Write your comment here "
-                                                    onChange={(e) => this.handleTextChange(e)}></textarea>
-                                            </div>
+            <Container centered>
+                <Card fluid>
+                    <div>
+                        <div className="container mt-auto ml-auto mr-auto mb">
+                            <div class="row mt-5">
+                                <div class="col-md-8 ml-auto mr-auto">
+                                    <Card fluid>
+                                        <h5 class="card-header">Welcome , what do you want to share today?</h5>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="wallInput" class="sr-only" placeholder="Write something">Write something</label>
+                                                    <textarea class="form-control" id="wallInput" rows="2" name="description" placeholder="Write your comment here "
+                                                        onChange={(e) => this.handleTextChange(e)}></textarea>
+                                                </div>
 
-                                            <button className="btn btn-warning"
-                                                onClick={() => this.sendComment()}
-                                            >
-                                                Post
-                    </button>
-                                        </form>
+                                                <button className="btn btn-warning"
+                                                    onClick={() => this.sendComment()}
+                                                >
+                                                    Post
+                                                 </button>
+                                            </form>
 
-                                        <div class="float-right">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Text</button>
-                                                <button type="button" class="btn btn-secondary"><i class="far fa-image"></i> Photo</button>
-                                                <button type="button" class="btn btn-secondary"><i class="fas fa-video"></i> Video</button>
+                                            <div class="float-right ">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button onClick={() => this.handleButtonText()} type="button" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Text</button>
+                                                    <button onClick={() => this.handleButtonPhoto()} type="button" class="btn btn-secondary"><i class="far fa-image"></i> Photo</button>
+                                                    <button onClick={() => this.handleButtonVideo()} type="button" class="btn btn-secondary"><i class="fas fa-video"></i> Video</button>
+                                                </div>
+                                                {/* <iframe height="auto"   src="https://www.youtube.com/embed/Vjw7wAZqSM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
                                             </div>
                                         </div>
-                                    </div>
+                                    </Card>
                                 </div>
                             </div>
+
                         </div>
-                        {/* <div clasName="mt-5"> */}
-                        {/* <Card body centered>
-                            <input className="form-control col-md-16" name="description" type="text" placeholder="Write your comment here "
-                                onChange={(e) => this.handleTextChange(e)}
-                            />
-                            <button className="btn btn-warning"
-                                onClick={() => this.sendComment()}
-                            >
-                                Comment
-                    </button>
-                        </Card>
-                    </div> */}
-                        {/* <button className="btn btn-primary"
-                        onClick={() => this.sendComment()}
-                    >
-                        Comment
-                    </button> */}
-                    </div>
-                    <div className="comment-list">
+                        <div className="comment-list mb-5">
 
-                        {
-                            this.state.feeds.map((elem) => {
-                                return (
-                                    <CommentPanel addComment={this.addComment} feed={elem} />
-                                )
-                            })
-                        }
+                            {
+                                this.state.feeds.map((elem) => {
+                                    return (
+                                        <CommentPanel addComment={this.addComment} feed={elem} />
+                                    )
+                                })
+                            }
 
+                        </div>
                     </div>
-                </div>
-            </Segment.Group>
+
+                </Card>
+            </Container>
+
         )
     }
 }

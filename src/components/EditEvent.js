@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios'
 import { API_URL } from '../config'
 import { Redirect } from 'react-router-dom';
+import { Responsive, Segment } from 'semantic-ui-react'
+
 
 export default class EditEvent extends React.Component {
 
@@ -15,6 +17,7 @@ export default class EditEvent extends React.Component {
         //             event: res.data
         //         })
         //     })
+        
     }
 
     handleEdit = (e) => {
@@ -28,7 +31,7 @@ export default class EditEvent extends React.Component {
         }, { withCredentials: true })
             .then((res) => {
                 console.log(res)
-                this.props.onClose() //para que se cierre el form del edit
+                this.props.onClose() //para que se cierre el form del edit, dinamico
             });
     }
 
@@ -69,33 +72,22 @@ export default class EditEvent extends React.Component {
     }
 
     render() {
-        // if (!this.props.loggedInUser) {
-        //     return <Redirect to='/signin' />
-        // }
-        // if (!this.state.event) {
-        //     return (
-        //         <div class="text-center">
-        //             <div class="spinner-border" role="status">
-        //                 <span class="sr-only">Loading...</span>
-        //             </div>
-        //         </div>
-        //     )
-        // }
+ 
         const { name, topics, image, city } = this.state.event
         return (
             <>
-                <form >
+                <Responsive as={Segment} minWidth={320} maxWidth={2559}>
                     <div class="form-group">
-                        <label htmlFor="name">name</label>
+                        <label htmlFor="name">Name</label>
                         <input type="text" class="form-control"
                             onChange={this.handlenameChange} name="name" id="name" value={name} />
                     </div>
                     <div class="form-group">
-                        <label htmlFor="topics">topics</label>
+                        <label htmlFor="topics">Topics</label>
                         <input type="text" class="form-control" onChange={this.handletopicsChange} name="topics" id="topics" value={topics} />
                     </div>
                     <div class="form-group">
-                        <label htmlFor="image">image</label>
+                        <label htmlFor="image">Image</label>
                         <input type="text" class="form-control" onChange={this.handleimageChange} name="image" id="image" value={image} />
                     </div>
                     <div class="form-group">
@@ -105,7 +97,7 @@ export default class EditEvent extends React.Component {
 
                     <button type="button" class="btn btn-danger" onClick={this.handleEdit}>Edit event</button>
 
-                </form>
+                </Responsive>
             </>
         )
     }
