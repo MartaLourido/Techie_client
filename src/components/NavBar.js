@@ -28,7 +28,7 @@ export class NavBar extends Component {
                                         <Nav>
                                             <Nav.Link href="/feed">Feed</Nav.Link>
                                             <Nav.Link href="/events">Events</Nav.Link>
-                                            <Nav.Link href="/CompletFeed">Events</Nav.Link>
+                                     
                                           
                                         </Nav>
 

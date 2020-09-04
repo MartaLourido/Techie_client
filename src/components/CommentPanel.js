@@ -65,10 +65,7 @@ class CommentPanel extends Component {
         console.log("running showSubComments")
         return (
             <div>
-                {/* <div className="col-md-6">
-                    <input onChange={this.updateNewComment} className="form-control col-md-5" />
-                    <button onClick={() => this.props.addComment(this.props.feed._id, this.state.newComment)} className="btn btn-success">New Comment</button>
-                </div> */}
+              
                 <div className="comment-list mt-4">
                     <>
                         <Comment.Group>
