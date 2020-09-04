@@ -13,6 +13,17 @@
   }
 }
 
+@media (min-width: 992px) {
+  .gedf-main {
+      padding-left: 4rem;
+      padding-right: 4rem;
+  }
+  .gedf-card {
+      margin-bottom: 2.77rem;
+  }
+}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
