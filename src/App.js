@@ -19,7 +19,7 @@ import Footer from './components/Footer'
 import 'semantic-ui-css/semantic.min.css'
 import NavBar from './components/NavBar'
 import EditEvent from './components/EditEvent'
-import CompletFeed from './components/CompletFeed'
+
 
 
 class App extends React.Component {
@@ -30,12 +30,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // axios.get(`${API_URL}/`)
-    //   .then((res) => {
-    //     this.setState({
-    //       : res.data
-    //     })
-    //   })
+ 
     if (!this.state.loggedInUser) {
       axios.get(`${API_URL}/user`, { withCredentials: true })
         .then((res) => {
@@ -142,9 +137,7 @@ console.log( '----------------------', email.value)
            <Route exact path="/events/edit" render={(routeProps) => {
             return <EditEvent {...routeProps} />
           }} />
-          <Route exact path="/CompletFeed" render={(routeProps) => {
-            return <CompletFeed {...routeProps} />
-          }} />
+       
 
           
         
