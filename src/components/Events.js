@@ -179,7 +179,7 @@ export class Events extends Component {
                                             <Card.Text>
                                                 <h5>{moment(elem.date).format('DD/MM/YYYY')}</h5>
                                                 <h4>Topic of the day: {elem.topics}</h4>
-                                                <h4><span>📍</span>{elem.city}</h4>
+                                                <h4> <span>📍</span>{elem.city}</h4>
 
                                             </Card.Text>
                                         </Card.Body>
@@ -198,7 +198,8 @@ export class Events extends Component {
 
                                     {/*Doing a conditional ternary for show the button only when the user created the event*/}
                                     {
-                                        this.props.loggedInUser._id === elem.createdby ? (
+                                        this.props.loggedInUser && this.props.loggedInUser._id === elem.createdby && (
+
                                             <div>
                                                 <h5>You have been created this event!</h5>
                                                 <button data={elem._id} type="button" class="btn btn-outline-warning" onClick={this.handleDelete}>Delete</button>
@@ -211,7 +212,7 @@ export class Events extends Component {
 
                                             </div>
 
-                                        ) : ""
+                                        ) 
 
                                     }
                                 </div>

@@ -17,19 +17,6 @@ function Home() {
 
         </div>
 
-        // <CardGroup centered>
-        //     <Card centered>
-        //         <Card.Img variant="top" src="layout.png" alt="" />
-            
-        //         <Card.Footer>
-
-        //             <Link to={`/signup`}>
-        //             <button type="button" className="btn btn-secondary mt-4">Join us!</button>
-        //             </Link>
-        //         </Card.Footer>
-
-        //     </Card>
-        // </CardGroup>
     )
 }
 

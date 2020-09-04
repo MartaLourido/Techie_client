@@ -133,7 +133,7 @@ class CommentPanel extends Component {
         const { feed } = this.props
         const { likesCounter } = this.state
         console.log(feed)
-
+        const shareUrl = "https://www.facebook.com/"
 
         return (
             <div>
@@ -190,6 +190,7 @@ class CommentPanel extends Component {
                             label={{ basic: true, color: 'red', pointing: 'left', content: <div>{likesCounter}</div> }}
                         />
                          {this.comments()} 
+                         <FacebookShareCount url={shareUrl} />
                         
                          
                      </div>
