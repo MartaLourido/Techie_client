@@ -3,20 +3,18 @@ import axios from 'axios'
 import { API_URL } from '../config'
 import { Redirect, Link } from 'react-router-dom';
 import moment from 'moment';
-import { Card, CardGroup } from 'react-bootstrap'
+import { Card, CardGroup, Button, ButtonGroup } from 'react-bootstrap'
 import EditEvent from './EditEvent'
 
 // import SearchEvent from './SearchEvent'
 
 
 export class Events extends Component {
-    
+
 
     state = {
         events: [],
-        // filteredEvents: events
         image: "",
-        cities: ["", "Madrid", "Amsterdam", "Stockholm", "Barcelona"],
         filteredEvents: [],
         loggedInUser: null,
         showEditEvent: false,
@@ -111,7 +109,7 @@ export class Events extends Component {
     handleDelete = (e) => {
         // e.preventDefault()
         console.log(e.target.getAttribute("data"))
-       let id = e.target.getAttribute("data")
+        let id = e.target.getAttribute("data")
         axios.delete(`${API_URL}/event/${id}/delete`, { withCredentials: true })
             .then(() => {
 
@@ -128,7 +126,7 @@ export class Events extends Component {
             showEditEvent: true,
         })
 
-    
+
     }
 
 
@@ -143,18 +141,20 @@ export class Events extends Component {
 
                 <nav class="navbar navbar-light bg-light justify-content-between">
                     <form class="form-inline">
-                        <input type="text" icon='search' placeholder="search an event" aria-label="search" 
+                        <input type="text" icon='search' placeholder="search an event" aria-label="search"
                             className="input form-control mr-sm-2"
                             value={this.state.input}
                             onChange={this.handleSearch}
                         />
 
                     </form>
-                    < div className = "row mr-4">
-                    <button type="button" class="btn btn-danger" onClick={this.handleMyEvents}>My Events</button>
-                    <button type="button" class="btn btn-secondary" onClick={this.handleAllEvents}>All the Events</button>
-                    </div>
-                    
+                
+                    <ButtonGroup aria-label="Basic example">
+                        <Button variant="secondary" onClick={this.handleMyEvents} >My Events</Button>
+                        <Button variant="secondary"  onClick={this.handleAllEvents}>All the Events</Button>
+
+                    </ButtonGroup>
+
                 </nav>
                 <div className="mt-5 mb-5">
 
@@ -196,16 +196,16 @@ export class Events extends Component {
                                 <div className="mt-4 mb-4">
 
 
-
+                                    {/*Doing a conditional ternary for show the button only when the user created the event*/}
                                     {
                                         this.props.loggedInUser._id === elem.createdby ? (
                                             <div>
                                                 <h5>You have been created this event!</h5>
                                                 <button data={elem._id} type="button" class="btn btn-outline-warning" onClick={this.handleDelete}>Delete</button>
 
-                                                {/* <Link to="/events/edit"> */}
+
                                                 <button type="button" class="btn btn-outline-warning" onClick={this.handleEdit}>Edit</button>
-                                                {/* </Link> */}
+
 
 
 
@@ -219,7 +219,7 @@ export class Events extends Component {
                                 {this.state.showEditEvent &&
                                     <EditEvent
                                         event={elem}
-                                        onClose={() => {this.setState({ showEditEvent: false }); this.getEvents()}} 
+                                        onClose={() => { this.setState({ showEditEvent: false }); this.getEvents() }}
                                     />
                                 }
                             </div>
@@ -236,5 +236,6 @@ export class Events extends Component {
         )
     }
 }
+
 
 export default Events

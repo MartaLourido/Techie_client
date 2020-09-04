@@ -57,9 +57,9 @@ class CreateEvent extends Component {
         return (
             <Responsive as={Segment} minWidth={320} maxWidth={2559}>
                 <form onSubmit={this.handleSubmit}>
-                    <Container fluid="md">
+                    <Container fluid>
                         <Row>
-                            <div className="form-group row">
+                            <div className="form-group row mr-3 ml-3">
                                 <label for="name">Name</label>
                                 <input
                                     type="text"
@@ -109,7 +109,7 @@ class CreateEvent extends Component {
                                     value={this.state.place}
                                     onChange={this.handleInput}
                                 />
-                                <label for="Place">information </label>
+                                <label for="Place">Information </label>
                                 <input
                                     type="information"
                                     name="information"
@@ -117,7 +117,7 @@ class CreateEvent extends Component {
                                     value={this.state.information}
                                     onChange={this.handleInput}
                                 />
-                                <label for="Image">Image </label>
+                                <label for="Image">Image</label>
                                 <input
                                     type="url"
                                     name="image"

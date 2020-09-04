@@ -3,6 +3,7 @@ import axios from 'axios'
 import { API_URL } from '../config'
 import { Link } from "react-router-dom";
 import { Card, Icon, Image, Container } from 'semantic-ui-react'
+import moment from 'moment' //for do the format of the date
 
 
 
@@ -52,14 +53,14 @@ class UserProfile extends Component {
     render() {
         console.log(this.state.user)
         return (
-            <Container fluid>
+            <Container fluid margin>
                 {this.state.user &&
                     <Card centered margin>
                         <Image src={this.state.user.userAvatar} wrapped ui={false} />
                         <Card.Content>
                             <Card.Header> {this.state.user.username}</Card.Header>
                             <Card.Meta>
-                                <span className='date'>Joined in 2020</span>
+                                <span className='date'>Joined in {moment(this.state.user.createdAt).format('DD/MM/YYYY')}</span>
                             </Card.Meta>
                             <Card.Description>
                                 Email: {this.state.user.email}

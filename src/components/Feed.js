@@ -106,20 +106,24 @@ export class Feed extends Component {
                                                         onChange={(e) => this.handleTextChange(e)}></textarea>
                                                 </div>
 
-                                                <button className="btn btn-warning"
-                                                    onClick={() => this.sendComment()}
-                                                >
-                                                    Post
-                                                 </button>
+                                               
                                             </form>
 
                                             <div class="float-right ">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button onClick={() => this.handleButtonText()} type="button" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Text</button>
-                                                    <button onClick={() => this.handleButtonPhoto()} type="button" class="btn btn-secondary"><i class="far fa-image"></i> Photo</button>
+                                                    {/* <button onClick={() => this.handleButtonImage()} type="button" class="btn btn-secondary"><i class="far fa-image"></i> Photo</button> */}
                                                     <button onClick={() => this.handleButtonVideo()} type="button" class="btn btn-secondary"><i class="fas fa-video"></i> Video</button>
                                                 </div>
                                                 {/* <iframe height="auto"   src="https://www.youtube.com/embed/Vjw7wAZqSM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+                                            </div>
+                                            <div className="container-fluid">
+                                            <button className="btn btn-warning"
+                                                    onClick={() => this.sendComment()}
+                                                >
+                                                    Post
+                                                 </button>
+
                                             </div>
                                         </div>
                                     </Card>

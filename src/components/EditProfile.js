@@ -104,7 +104,7 @@ export default class EditProfile extends React.Component {
                         <input type="text" class="form-control" onChange={this.handleCityChange} name="city" id="city" value={city} />
                     </div>
 
-                    <button type="button" class="btn btn-danger" onClick={this.handleEdit}>Edit Profile</button>
+                    <button type="button" class="btn btn-warning" onClick={this.handleEdit}>Edit Profile</button>
 
                     </Responsive>
             </>

@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { API_URL } from '../config'
 import ReactLinkify from 'react-linkify'
-import { Button, Comment, Form, Embed } from 'semantic-ui-react'
+import { Button, Comment, Form, Container, Card } from 'semantic-ui-react'
 import moment from 'moment' //for change the format date 
 import ReactPlayer from "react-player" //for be able to share url videos
-import { FacebookShareButton, WhatsappShareButton, LinkedinShareButton, TwitterShareButton } from "react-share" //this is an API for be able to share post or events in social media  
-import { FacebookIcon,  WhatsappIcon,   LinkedinIcon,   TwitterIcon} from "react-share";
+import { FacebookShareButton, WhatsappShareButton, LinkedinShareButton, TwitterShareButton, FacebookShareCount, shareUrl } from "react-share" //this is an API for be able to share post or events in social media  
+import { FacebookIcon, WhatsappIcon, LinkedinIcon, TwitterIcon } from "react-share";
 
 import Clock from 'moment'
 
@@ -139,25 +139,37 @@ class CommentPanel extends Component {
 
 
         return (
-
-            <div className="mt-3 ml-3" key={feed._id}>
-                <div className="row" >
-                    <div className="col-md-2">
-                        <img width="75px" height="75px" className="rounded" src={feed.createdby && feed.createdby.userAvatar} alt="..." class="rounded-circle"></img>
-                        <Comment.Author>{feed.createdby.username}</Comment.Author>
-
-                        <div>{moment(feed.createAt).format('DD/MM/YYYY')}</div>
+            <div>
+            <div class="card gedf-card mr-5 mt-5 ml-5">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                                <img class="rounded-circle" width="45" src={feed.createdby && feed.createdby.userAvatar} alt="" />
+                            </div>
+                            <div class="ml-2">
+                                <div class="h5 m-0">{feed.createdby.username}</div>
+                                <div class="h7 text-muted">{feed.name}</div>
+                            </div>
+                        </div>
+                        <div>
+                    
+                        </div>
                     </div>
 
-                    <div class="text-left col-md-10">
-                        {/* <h2 class="featurette-heading">{feed.name}</h2> */}
+                </div>
+            </div>
 
-                        {feed.typeComment === "video" ?
+             <div class="card-body">
+             <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {moment(feed.createAt).format('DD/MM/YYYY')}</div>
+        
+             <p class="card-text">
+             {feed.typeComment === "video" ?
                             <card>
                                 <ReactPlayer
 
-                                    width="auto"
-                                    height=" auto"
+                                    width="auto%"
+                            
 
                                     url={feed.description}
 
@@ -169,32 +181,25 @@ class CommentPanel extends Component {
                             )
 
                         }
-
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col-md-2">
-                        {/* <button className="btn btn-danger">{likesCounter}</button>
-                        <button className="btn btn-danger ml-4" onClick={() => this.clickLikes()}><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg></button> */}
-                        <Button onClick={() => this.clickLikes()}
+             </p>
+             
+                     <div class="">
+                       
+                        
+                         <Button onClick={() => this.clickLikes()}
                             color='red'
                             content='Like'
                             icon='heart'
                             label={{ basic: true, color: 'red', pointing: 'left', content: <div>{likesCounter}</div> }}
                         />
-                        <FacebookShareButton/>
-                    </div>
-                    <div className="col-md-10  text-left">
-                        {this.comments()}
-                    </div>
-                </div>
-
-
-            </div>
-
+                         {this.comments()} 
+                        
+                         
+                     </div>
+             
+             
+         </div >    
+         </div>
 
 
 

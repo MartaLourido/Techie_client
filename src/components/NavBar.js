@@ -4,7 +4,7 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 export class NavBar extends Component {
     render() {
         return (
-            <div>
+            <div className="mb-4">
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <a className="navbar-brand" href="/">
                         <img src="logo.png" height="100" className="d-inline-block align-top" alt="" loading="lazy" />
@@ -28,6 +28,7 @@ export class NavBar extends Component {
                                         <Nav>
                                             <Nav.Link href="/feed">Feed</Nav.Link>
                                             <Nav.Link href="/events">Events</Nav.Link>
+                                            <Nav.Link href="/CompletFeed">Events</Nav.Link>
                                           
                                         </Nav>
 
